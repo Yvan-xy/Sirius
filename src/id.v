@@ -1,3 +1,4 @@
+`include "defines.v"
 module id(
     input   wire                    rst,
     input   wire [`InstAddrBus]     pc_i,
@@ -42,7 +43,7 @@ module id(
             alusel_o    <= `EXE_RES_NOP;
             wd_o        <= `NOPRegAddr;
             wreg_o      <= `WriteDisable;
-            instvalid   <= `Instvalid;
+            instvalid   <= `InstValid;
             reg1_read_o <= 1'b0;
             reg2_read_o <= 1'b0;
             reg1_addr_o <= `NOPRegAddr;
@@ -87,7 +88,7 @@ module id(
                     wd_o    <=      inst_i[20:16];
 
                     // "ori" is valid instruction
-                    instvalid    <=     `Instvalid;
+                    instvalid    <=     `InstValid;
 
                 end
                 default:    begin
@@ -102,7 +103,7 @@ module id(
         if(rst == `RstEnable) begin
             reg1_o  <=  `ZeroWord;
         end else if(reg1_read_o == 1'b1) begin
-            reg1_o  <=  reg1_data_o;
+            reg1_o  <=  reg1_data_i;
         end else if(reg1_read_o == 1'b0) begin
             reg1_o  <=  imm;
         end else begin

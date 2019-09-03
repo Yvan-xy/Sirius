@@ -1,0 +1,1 @@
+-wto "abbf8912a37f46e79f74f429b9889872" --incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "unisims_ver" -L "unimacro_ver" -L "secureip" --snapshot "Sirius_tb_behav" "xil_defaultlib.Sirius_tb" "xil_defaultlib.glbl" -log "elaborate.log" 

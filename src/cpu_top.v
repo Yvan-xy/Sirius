@@ -15,7 +15,7 @@ module cpu_top(
 
         .rom_addr_o(inst_addr),
         .rom_data_i(inst),
-        .rom_ce(rom_ce)
+        .rom_ce_o(rom_ce)
     );
 
     // Instantiate INST_ROM

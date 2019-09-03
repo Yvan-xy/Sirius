@@ -1,9 +1,10 @@
+`include "defines.v"
 module Sirius(
     input wire              clk,
     input wire              rst,
 
     input wire[`RegBus]     rom_data_i,     // fetched instruction
-    output wire[`RegBus]    rom_adddr_o,    // 
+    output wire[`RegBus]    rom_addr_o,    // 
     output wire             rom_ce_o        // 
 );
     // connect the port of IF/ID and ID 

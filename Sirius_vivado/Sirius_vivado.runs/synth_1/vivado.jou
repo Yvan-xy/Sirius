@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Tue Sep  3 16:06:39 2019
+# Process ID: 14084
+# Current directory: D:/code/Sirius/Sirius_vivado/Sirius_vivado.runs/synth_1
+# Command line: vivado.exe -log Sirius_tb.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Sirius_tb.tcl
+# Log file: D:/code/Sirius/Sirius_vivado/Sirius_vivado.runs/synth_1/Sirius_tb.vds
+# Journal file: D:/code/Sirius/Sirius_vivado/Sirius_vivado.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source Sirius_tb.tcl -notrace

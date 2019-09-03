@@ -1,0 +1,21 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../../src/Sirius.v" \
+"../../../../../src/cpu_top.v" \
+"../../../../../src/ex.v" \
+"../../../../../src/ex_mem.v" \
+"../../../../../src/id.v" \
+"../../../../../src/id_ex.v" \
+"../../../../../src/if_id.v" \
+"../../../../../src/inst_rom.v" \
+"../../../../../src/mem.v" \
+"../../../../../src/mem_wb.v" \
+"../../../../../src/pc_reg.v" \
+"../../../../../src/regfile.v" \
+"../../../../../src/Sirius_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

@@ -4,7 +4,7 @@ module mem(
     // Data from exe_mem register
     input wire[`RegAddrBus]     wd_i,
     input wire[`RegBus]         wdata_i,
-    input wire                  wreg_i
+    input wire                  wreg_i,
 
     // Result of memory stage
     output reg[`RegAddrBus]     wd_o,

@@ -1,3 +1,4 @@
+`include "defines.v"
 module if_id(
     input wire  clk,
     input wire  rst,
@@ -15,7 +16,7 @@ module if_id(
         if(rst == `RstEnable) begin
             id_pc <= `ZeroWord;
             id_inst <= `ZeroWord;
-        end else if begin
+        end else begin
             id_pc <= if_pc;
             id_inst <= if_pc;
         end

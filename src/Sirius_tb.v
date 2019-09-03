@@ -20,3 +20,4 @@ module Sirius_tb();
         .clk(CLOCK_50),
         .rst(rst)
     );
+endmodule

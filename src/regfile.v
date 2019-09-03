@@ -10,12 +10,12 @@ module regfile(
     /*  read port 1 */
     input wire re1,
     input wire [`RegAddrBus] raddr1,
-    input wire [`RegBus] rdata1,
+    output reg [`RegBus] rdata1,
 
     /*  read port 2 */
     input wire re2,
     input wire [`RegAddrBus] raddr2,
-    input wire [`RegBus] rdata2
+    output reg [`RegBus] rdata2
 );
     
     reg [`RegBus] regs[0:`RegNum - 1];      // define 32 registers
@@ -41,7 +41,7 @@ module regfile(
         end else if(re1 == `ReadEnable) begin
             rdata1 <= regs[raddr1];
         end else begin
-            radata1 <=  `ZeroWord;
+            rdata1 <=  `ZeroWord;
         end
     end
 
@@ -57,7 +57,7 @@ module regfile(
         end else if(re2 == `ReadEnable) begin
             rdata2 <= regs[raddr2];
         end else begin
-            radata2 <=  `ZeroWord;
+            rdata2 <=  `ZeroWord;
         end
     end
 

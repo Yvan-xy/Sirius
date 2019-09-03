@@ -1,3 +1,4 @@
+`include "defines.v"
 module pc_reg(
     input wire  clk,
     input wire  rst,
@@ -16,7 +17,7 @@ module pc_reg(
     always @ (posedge clk) begin
         if(ce == `ChipDisable) begin
             pc <= 32'h00000000;
-        end else if begin
+        end else begin
             pc <= pc + 4'h4;
         end
     end
