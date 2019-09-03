@@ -3,9 +3,9 @@
 May 24 2019
 15:06:07
 D:/code/Sirius/Sirius_vivado/Sirius_vivado.sim/sim_1/behav/xsim/glbl.v,1558713910,verilog,,,,glbl,,,,,,,,
-D:/code/Sirius/src/Sirius.v,1567497405,verilog,,D:/code/Sirius/src/cpu_top.v,D:/code/Sirius/src/defines.v,Sirius,,,,,,,,
+D:/code/Sirius/src/Sirius.v,1567499936,verilog,,D:/code/Sirius/src/cpu_top.v,D:/code/Sirius/src/defines.v,Sirius,,,,,,,,
 D:/code/Sirius/src/Sirius_tb.v,1567496315,verilog,,,,Sirius_tb,,,,,,,,
-D:/code/Sirius/src/cpu_top.v,1567497377,verilog,,D:/code/Sirius/src/ex.v,,cpu_top,,,,,,,,
+D:/code/Sirius/src/cpu_top.v,1567497377,verilog,,D:/code/Sirius/src/ex.v,D:/code/Sirius/src/defines.v,cpu_top,,,,,,,,
 D:/code/Sirius/src/defines.v,1567496062,verilog,,,,,,,,,,,,
 D:/code/Sirius/src/ex.v,1567496062,verilog,,D:/code/Sirius/src/ex_mem.v,,ex,,,,,,,,
 D:/code/Sirius/src/ex_mem.v,1567496062,verilog,,D:/code/Sirius/src/id.v,,ex_mem,,,,,,,,

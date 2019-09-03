@@ -1,4 +1,0 @@
-Running: xsim.dir/Sirius_tb_behav/xsimk.exe -simmode gui -wdb Sirius_tb_behav.wdb -simrunnum 0 -socket 51517
-Design successfully loaded
-Design Loading Memory Usage: 6516 KB (Peak: 6516 KB)
-Design Loading CPU Usage: 0 ms

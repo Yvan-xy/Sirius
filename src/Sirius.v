@@ -64,7 +64,7 @@ module Sirius(
         .ce(rom_ce_o)
     );    
 
-    assign rom_adddr_o = pc;
+    assign rom_addr_o = pc;
 
     if_id if_id0(
         .clk(clk),
@@ -143,12 +143,12 @@ module Sirius(
         .rst(rst),
 
         // Input data from ID/EX
-        .aluop_i(ex_aluop_i),
-        .alusel_i(ex_alusel_i),
-        .reg1_i(ex_reg1_i),
-        .reg2_i(ex_reg2_i),
-        .wd_i(ex_wd_i),
-        .wreg_i(ex_wreg_i),
+        .aluop_i(ex_aluop_o),
+        .alusel_i(ex_alusel_o),
+        .reg1_i(ex_reg1_o),
+        .reg2_i(ex_reg2_o),
+        .wd_i(ex_wd_o),
+        .wreg_i(ex_wreg_o),
         
         // Output data to EX/MEM
         .wd_o(ex_wd_o),
