@@ -14,13 +14,5 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/if_id.v" into li
 INFO: [VRFC 10-311] analyzing module if_id
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/inst_rom.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module inst_rom
-INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/mem.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module mem
-INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/mem_wb.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module mem_wb
-INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/pc_reg.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module pc_reg
-INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/regfile.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module regfile
-INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/Sirius_tb.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module Sirius_tb
+ERROR: [VRFC 10-395] cannot assign a packed type to an unpacked type [D:/code/Sirius/src/inst_rom.v:8]
+ERROR: [VRFC 10-2865] module 'inst_rom' ignored due to previous errors [D:/code/Sirius/src/inst_rom.v:1]
