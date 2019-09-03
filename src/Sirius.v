@@ -143,10 +143,10 @@ module Sirius(
         .rst(rst),
 
         // Input data from ID/EX
-        .aluop_i(ex_aluop_o),
-        .alusel_i(ex_alusel_o),
-        .reg1_i(ex_reg1_o),
-        .reg2_i(ex_reg2_o),
+        .aluop_i(ex_aluop_i),
+        .alusel_i(ex_alusel_i),
+        .reg1_i(ex_reg1_i),
+        .reg2_i(ex_reg2_i),
         .wd_i(ex_wd_o),
         .wreg_i(ex_wreg_o),
         
