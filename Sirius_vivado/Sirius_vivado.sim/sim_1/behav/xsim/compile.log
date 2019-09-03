@@ -1,9 +1,5 @@
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/Sirius.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module Sirius
-INFO: [VRFC 10-2458] undeclared symbol ex_aluop_o, assumed default net type wire [D:/code/Sirius/src/Sirius.v:146]
-INFO: [VRFC 10-2458] undeclared symbol ex_alusel_o, assumed default net type wire [D:/code/Sirius/src/Sirius.v:147]
-INFO: [VRFC 10-2458] undeclared symbol ex_reg1_o, assumed default net type wire [D:/code/Sirius/src/Sirius.v:148]
-INFO: [VRFC 10-2458] undeclared symbol ex_reg2_o, assumed default net type wire [D:/code/Sirius/src/Sirius.v:149]
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/cpu_top.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module cpu_top
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/ex.v" into library xil_defaultlib

@@ -12,14 +12,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="11634fs"></ZoomEndTime>
-      <Cursor1Time time="1000000000fs"></Cursor1Time>
+      <ZoomEndTime time="699360923fs"></ZoomEndTime>
+      <Cursor1Time time="210000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="175"></NameColumnWidth>
-      <ValueColumnWidth column_width="140"></ValueColumnWidth>
+      <ValueColumnWidth column_width="85"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="4" />
+   <WVObjectSize size="21" />
    <wvobject fp_name="/Sirius_tb/CLOCK_50" type="logic">
       <obj_property name="ElementShortName">CLOCK_50</obj_property>
       <obj_property name="ObjectShortName">CLOCK_50</obj_property>
@@ -35,5 +35,73 @@
    <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/regfile0/wdata" type="array">
       <obj_property name="ElementShortName">wdata[31:0]</obj_property>
       <obj_property name="ObjectShortName">wdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/if_id0/if_pc" type="array">
+      <obj_property name="ElementShortName">if_pc[31:0]</obj_property>
+      <obj_property name="ObjectShortName">if_pc[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/ex0/logicout" type="array">
+      <obj_property name="ElementShortName">logicout[31:0]</obj_property>
+      <obj_property name="ObjectShortName">logicout[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/ex0/alusel_i" type="array">
+      <obj_property name="ElementShortName">alusel_i[2:0]</obj_property>
+      <obj_property name="ObjectShortName">alusel_i[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/ex0/reg1_i" type="array">
+      <obj_property name="ElementShortName">reg1_i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">reg1_i[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/ex0/reg2_i" type="array">
+      <obj_property name="ElementShortName">reg2_i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">reg2_i[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/ex0/wd_i" type="array">
+      <obj_property name="ElementShortName">wd_i[4:0]</obj_property>
+      <obj_property name="ObjectShortName">wd_i[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/id_ex0/ex_reg1" type="array">
+      <obj_property name="ElementShortName">ex_reg1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ex_reg1[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/id_ex0/id_reg1" type="array">
+      <obj_property name="ElementShortName">id_reg1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">id_reg1[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/id0/reg1_data_i" type="array">
+      <obj_property name="ElementShortName">reg1_data_i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">reg1_data_i[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/id0/aluop_o" type="array">
+      <obj_property name="ElementShortName">aluop_o[7:0]</obj_property>
+      <obj_property name="ObjectShortName">aluop_o[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/id0/imm" type="array">
+      <obj_property name="ElementShortName">imm[31:0]</obj_property>
+      <obj_property name="ObjectShortName">imm[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/id0/op" type="array">
+      <obj_property name="ElementShortName">op[5:0]</obj_property>
+      <obj_property name="ObjectShortName">op[5:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/id0/inst_i" type="array">
+      <obj_property name="ElementShortName">inst_i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">inst_i[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/pc_reg0/ce" type="logic">
+      <obj_property name="ElementShortName">ce</obj_property>
+      <obj_property name="ObjectShortName">ce</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/sirius/pc_reg0/pc" type="array">
+      <obj_property name="ElementShortName">pc[31:0]</obj_property>
+      <obj_property name="ObjectShortName">pc[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/inst" type="array">
+      <obj_property name="ElementShortName">inst[31:0]</obj_property>
+      <obj_property name="ObjectShortName">inst[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Sirius_tb/cpu_top0/inst_rom0/inst" type="array">
+      <obj_property name="ElementShortName">inst[31:0]</obj_property>
+      <obj_property name="ObjectShortName">inst[31:0]</obj_property>
    </wvobject>
 </wave_config>

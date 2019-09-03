@@ -3,10 +3,6 @@ Copyright 1986-1999, 2001-2019 Xilinx, Inc. All Rights Reserved.
 Running: D:/Tools/develop/xlinx/Vivado/2019.1/bin/unwrapped/win64.o/xelab.exe -wto abbf8912a37f46e79f74f429b9889872 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot Sirius_tb_behav xil_defaultlib.Sirius_tb xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 8 for port 'aluop_i' [D:/code/Sirius/src/Sirius.v:146]
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 3 for port 'alusel_i' [D:/code/Sirius/src/Sirius.v:147]
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 32 for port 'reg1_i' [D:/code/Sirius/src/Sirius.v:148]
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 32 for port 'reg2_i' [D:/code/Sirius/src/Sirius.v:149]
 Completed static elaboration
 Starting simulation data flow analysis
 WARNING: [XSIM 43-4099] "D:/code/Sirius/src/cpu_top.v" Line 2. Module cpu_top doesn't have a timescale but at least one module in design has a timescale.
