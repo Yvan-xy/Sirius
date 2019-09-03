@@ -5,10 +5,10 @@ module inst_rom(
 );
     
     // Define an inst array
-    reg[`InstBus] inst_mem[0:`InstMemNum - 1] = 32'h34011100;
+    reg[`InstBus] inst_mem[0:`InstMemNum - 1];
 
     // Use the file "inst_rom.data" to init the inst_rom
-    //initial $readmemh ("./inst_rom.data", inst_mem);
+    initial $readmemh ("./inst_rom.data", inst_mem);
 
     always @ (*) begin
         if(ce == `ChipDisable) begin
