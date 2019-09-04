@@ -11,12 +11,12 @@ module cpu_top(
 
     // Instantiate Sirius
     Sirius sirius(
-        .clk(clk),
-        .rst(rst),
+         .clk(clk),
+         .rst(rst),
 
-        .rom_data_i(inst),
-        .rom_addr_o(inst_addr),
-        .rom_ce_o(rom_ce)
+         .rom_data_i(inst),
+         .rom_addr_o(inst_addr),
+         .rom_ce_o(rom_ce)
     );
 
     // Instantiate INST_ROM

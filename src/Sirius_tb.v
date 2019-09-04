@@ -13,7 +13,8 @@ module Sirius_tb();
     initial begin
         rst = `RstEnable;
         #195 rst = `RstDisable;
-        #1000 $stop;
+        // #1000 $stop;
+        #1000 $finish;
     end
 
     cpu_top cpu_top0(
