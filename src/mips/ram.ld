@@ -1,3 +1,0 @@
-MEMORY{
-    ram:ORIGIN
-}
