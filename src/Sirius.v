@@ -1,4 +1,4 @@
-`include "defines.v"
+`include "./defines/defines.v"
 module Sirius(
     input wire              clk,
     input wire              rst,

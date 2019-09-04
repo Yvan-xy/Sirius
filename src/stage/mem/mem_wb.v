@@ -1,3 +1,5 @@
+`include "../../defines/defines.v"
+
 module mem_wb (
     input wire                  clk,
     input wire                  rst,

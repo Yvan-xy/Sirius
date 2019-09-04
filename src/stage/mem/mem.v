@@ -1,3 +1,5 @@
+`include "../../defines/defines.v"
+
 module mem(
     input wire                  rst,
 
