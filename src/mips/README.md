@@ -3,19 +3,19 @@
 
 ### Assembly
 ---
-```shell
+```sh
 mipsel-linux-gnu-as -EB -o a.o a.s
 ```
 The `-EB` option is big endian choice.
 
 Now you have got an ELF file,you need to link it by yourself.Before this,you can use this command to check it:
 
-```shell
+```sh
 mipsel-linux-gnu-readelf -S a.o
 ```
 
 You can get the section headers of it,like this:
-```shell
+```sh
 root@Aurora:/home/code/verilog/Sirius/src/mips(master⚡) # mipsel-linux-gnu-readelf -S a.o                                  1 ↵
 There are 11 section headers, starting at offset 0x184:
 
@@ -43,11 +43,11 @@ root@Aurora:/home/code/verilog/Sirius/src/mips(master⚡) #
 ### Link
 ---
 The next step is link:
-```shell
+```sh
 mipsel-linux-gnu-ld -EB -o a.om a.o
 ```
 Now you have got a executable file.You can use readelf to check it:
-```shell
+```sh
 root@Aurora:/home/code/verilog/Sirius/src/mips(master⚡) # mipsel-linux-gnu-readelf -h inst_rom.om
 ELF 头：
   Magic：  7f 45 4c 46 01 02 01 00 00 00 00 00 00 00 00 00
@@ -73,13 +73,13 @@ root@Aurora:/home/code/verilog/Sirius/src/mips(master⚡) #
 ```
 The program header is newly added.We can use the following command to read the Program header:
 
-```shell
+```sh
 mipsel-linux-gnu-readelf -l a.o
 ```
 
 You can get this:
 
-```shell
+```sh
 root@Aurora:/home/code/verilog/Sirius/src/mips(master⚡) # mipsel-linux-gnu-readelf -l inst_rom.om
 
 Elf 文件类型为 EXEC (可执行文件)
@@ -102,13 +102,13 @@ root@Aurora:/home/code/verilog/Sirius/src/mips(master⚡) #
 
 ### Translate 
 ---
-The a.om is an ELF file,which is quite different from ROM init file like "inst_rom.data".So we need to translate the format.We can use the "objdump" to translate into "bin" file.In fact, we need to do it by ourselves...
+The a.om is an ELF file,which is quite different from ROM init file like "inst_rom.data".So we need to translate the format.We can use the "objdump" to translate into "binary data" file.In fact, we need to do it manually...
 
-```shell
+```sh
 mipsel-linux-gnu-objdump -D a.om
 ```
 We can use this command to get its disassembly code:
-```shell
+```sh
 root@Aurora:/home/code/verilog/Sirius/src/mips(master⚡) # mipsel-linux-gnu-objdump -D inst_rom.om                                                                      1 ↵
 
 inst_rom.om：     文件格式 elf32-tradbigmips
@@ -147,12 +147,12 @@ Disassembly of section .gnu.attributes:
 
 Now we need to select the instructions manually:
 
-```shell
+```sh
 mipsel-linux-gnu-objdump -D inst_rom.om | sed '/__start/, /^$/!d' | sed -n '1,/^$/p' | sed  '/start/d | awk -F " " '{print $2}'
 ```
 
 Like this:
-```shell
+```sh
 root@Aurora:/home/code/verilog/Sirius/src/mips(master⚡) # mipsel-linux-gnu-objdump -D inst_rom.om | sed '/__start/, /^$/!d' | sed -n '1,/^$/p' | sed  '/start/d'
   4000d0:       34011100        li      at,0x1100
   4000d4:       34020020        li      v0,0x20
