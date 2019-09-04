@@ -148,7 +148,7 @@ Disassembly of section .gnu.attributes:
 Now we need to select the instructions manually:
 
 ```shell
-mipsel-linux-gnu-objdump -D inst_rom.om | sed '/__start/, /^$/!d' | sed -n '1,/^$/p' | sed  '/start/d
+mipsel-linux-gnu-objdump -D inst_rom.om | sed '/__start/, /^$/!d' | sed -n '1,/^$/p' | sed  '/start/d | awk -F " " '{print $2}'
 ```
 
 Like this:
@@ -159,7 +159,14 @@ root@Aurora:/home/code/verilog/Sirius/src/mips(master⚡) # mipsel-linux-gnu-obj
   4000d8:       3403ff00        li      v1,0xff00
   4000dc:       3404ffff        li      a0,0xffff
 
-root@Aurora:/home/code/verilog/Sirius/src/mips(master⚡) #
+root@Aurora:/home/code/verilog/Sirius/src/mips(master○) # mipsel-linux-gnu-objdump -D inst_rom.om | sed '/__start/, /^$/!d' | sed -n '1,/^$/p' | sed  '/start/d' | awk -F " " '{print $2}'
+34011100
+34020020
+3403ff00
+3404ffff
+
+root@Aurora:/home/code/verilog/Sirius/src/mips(master○) # 
+
 ```
 
 Congratulations! You have got the instructions!
