@@ -9,18 +9,27 @@ module id(
     input   wire [`RegBus]          reg1_data_i,    // The first value from Regfile
     input   wire [`RegBus]          reg2_data_i,    // The second value from Regfile
 
+    // data forwarded from memory stage
+    input   wire                    mem_wreg_i,
+    input   wire [`RegBus]          mem_wdata_i,
+    input   wire [`RegAddrBus]      mem_wd_i,
 
-    output  reg                    reg1_read_o,     // The Enable signal of the first port of the Regfile
-    output  reg                    reg2_read_o,     // The Enable signal of the second port of the Regfile
-    output  reg [`RegAddrBus]      reg1_addr_o,     // The address of the first register in Regfile
-    output  reg [`RegAddrBus]      reg2_addr_o,     // The address of the second register in Regfile
+    // data forwarded from EX stage
+    input   wire                    ex_wreg_i,
+    input   wire [`RegBus]          ex_wdata_i,
+    input   wire [`RegAddrBus]      ex_wd_i,
 
-    output  reg [`AluOpBus]        aluop_o,         // The subtype of the instruction in decode stage
-    output  reg [`AluSelBus]       alusel_o,        // The type of the instruction in decode stage
-    output  reg [`RegBus]          reg1_o,          // The source "reg_1" in decode stage
-    output  reg [`RegBus]          reg2_o,          // The source "reg_2" in decode stage
-    output  reg [`RegAddrBus]      wd_o,            // The address of destination in Regfile in decode stage
-    output  reg                    wreg_o           // if exist destination to write back
+    output  reg                     reg1_read_o,     // The Enable signal of the first port of the Regfile
+    output  reg                     reg2_read_o,     // The Enable signal of the second port of the Regfile
+    output  reg [`RegAddrBus]       reg1_addr_o,     // The address of the first register in Regfile
+    output  reg [`RegAddrBus]       reg2_addr_o,     // The address of the second register in Regfile
+
+    output  reg [`AluOpBus]         aluop_o,         // The subtype of the instruction in decode stage
+    output  reg [`AluSelBus]        alusel_o,        // The type of the instruction in decode stage
+    output  reg [`RegBus]           reg1_o,          // The source "reg_1" in decode stage
+    output  reg [`RegBus]           reg2_o,          // The source "reg_2" in decode stage
+    output  reg [`RegAddrBus]       wd_o,            // The address of destination in Regfile in decode stage
+    output  reg                     wreg_o           // if exist destination to write back
 );
 
     // fetch opcode and ifun
@@ -103,6 +112,12 @@ module id(
     always @ (*) begin
         if(rst == `RstEnable) begin
             reg1_o  <=  `ZeroWord;
+        end else if((reg1_read_o == 1'b1) && (ex_wreg_i == 1'b1)            // receive forwarded data from EX stage
+                && (ex_wd_i == reg1_addr_o)) begin
+            reg1_o  <=  ex_wdata_i;
+        end else if((reg1_read_o == 1'b1) && (mem_wreg_i == 1'b1)           // receive forwarded data from memory stage
+                && (mem_wd_i == reg1_addr_o)) begin
+            reg1_o  <=  mem_wdata_i;
         end else if(reg1_read_o == 1'b1) begin
             reg1_o  <=  reg1_data_i;
         end else if(reg1_read_o == 1'b0) begin
@@ -115,6 +130,12 @@ module id(
     always @ (*) begin
         if(rst == `RstEnable) begin
             reg2_o  <=  `ZeroWord;
+        end else if((reg2_read_o == 1'b1) && (ex_wreg_i == 1'b1)
+                && (ex_wd_i == reg2_addr_o)) begin
+            reg2_o  <=  ex_wdata_i;
+        end else if((reg2_read_o == 1'b1) && (mem_wreg_i == 1'b1)
+                && (mem_wd_i == reg2_addr_o)) begin
+            reg2_o  <=  mem_wdata_i;
         end else if(reg2_read_o == 1'b1) begin
             reg2_o  <=  reg2_data_i;
         end else if(reg2_read_o == 1'b0) begin
@@ -125,40 +146,5 @@ module id(
     end
 
 endmodule
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
