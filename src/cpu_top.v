@@ -10,7 +10,7 @@ module cpu_top(
     wire                rom_ce;
 
     // Instantiate Sirius
-    Sirius sirius(
+    Sirius Sirius(
          .clk(clk),
          .rst(rst),
 
