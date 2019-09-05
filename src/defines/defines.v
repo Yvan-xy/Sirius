@@ -1,3 +1,6 @@
+`ifndef DEFINE_V
+`define DEFINE_V
+
 `define RstEnable       1'b1
 `define RstDisable      1'b0
 `define ZeroWord        32'h00000000
@@ -43,3 +46,4 @@
 `define RegNumLog2      5       // Width of Address Register
 `define NOPRegAddr      5'b00000
 
+`endif

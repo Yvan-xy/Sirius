@@ -1,3 +1,4 @@
+`include "../defines/defines.v"
 module regfile(
     input wire  clk,
     input wire  rst,

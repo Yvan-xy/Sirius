@@ -1,7 +1,17 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  \
+"../../../../../src/cpu/Sirius.v" \
 "../../../../../src/cpu_top.v" \
+"../../../../../src/cpu/ex/ex.v" \
+"../../../../../src/cpu/ex/ex_mem.v" \
+"../../../../../src/cpu/id/id.v" \
+"../../../../../src/cpu/id/id_ex.v" \
+"../../../../../src/cpu/if/if_id.v" \
 "../../../../../src/inst_rom.v" \
+"../../../../../src/cpu/mem/mem.v" \
+"../../../../../src/cpu/mem/mem_wb.v" \
+"../../../../../src/cpu/if/pc_reg.v" \
+"../../../../../src/register/regfile.v" \
 "../../../../../src/Sirius_tb.v" \
 
 # compile glbl module
