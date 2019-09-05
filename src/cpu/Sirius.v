@@ -1,4 +1,4 @@
-`include "./defines/defines.v"
+`include "../defines/defines.v"
 module Sirius(
     input wire              clk,
     input wire              rst,
@@ -136,7 +136,7 @@ module Sirius(
         .id_alusel(id_alusel_o),
         .id_reg1(id_reg1_o),
         .id_reg2(id_reg2_o),
-        .id_wd(ex_wd_i),
+        .id_wd(id_wd_o),
         .id_wreg(id_wreg_o),
 
         // Output data to EX
@@ -157,8 +157,8 @@ module Sirius(
         .alusel_i(ex_alusel_i),
         .reg1_i(ex_reg1_i),
         .reg2_i(ex_reg2_i),
-        .wd_i(ex_wd_o),
-        .wreg_i(ex_wreg_o),
+        .wd_i(ex_wd_i),
+        .wreg_i(ex_wreg_i),
         
         // Output data to EX/MEM
         .wd_o(ex_wd_o),
