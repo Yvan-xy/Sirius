@@ -203,6 +203,17 @@ module id(
                     instvalid   <=      `InstValid;
                 end
 
+                `EXE_ANDI:  begin   // andi rt, rs, immediate
+                    wreg_o      <=      `WriteEnable;
+                    aluop_o     <=      `EXE_AND_OP;
+                    alusel_o    <=      `EXE_RES_LOGIC;
+                    reg1_read_o <=      1'b1;
+                    reg2_read_o <=      1'b0;
+                    imm         <=      {16'h0,inst_i[15:0]};
+                    wd_o        <=      inst_i[20:16];
+                    instvalid   <=      `InstValid;
+                end
+
                 `EXE_LUI:   begin   // lui rt, immediate
                     wreg_o      <=      `WriteEnable;
                     aluop_o     <=      `EXE_OR_OP;

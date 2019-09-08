@@ -1,0 +1,26 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/cpu/Sirius.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Sirius
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/cpu_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cpu_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/cpu/ex/ex.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ex
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/cpu/ex/ex_mem.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ex_mem
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/cpu/id/id.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module id
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/cpu/id/id_ex.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module id_ex
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/cpu/if/if_id.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module if_id
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/inst_rom.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module inst_rom
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/cpu/mem/mem.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mem
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/cpu/mem/mem_wb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mem_wb
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/cpu/if/pc_reg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pc_reg
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/register/regfile.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module regfile
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/code/Sirius/src/Sirius_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Sirius_tb
