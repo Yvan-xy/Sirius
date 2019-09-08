@@ -79,7 +79,6 @@ module id(
                         5'b00000: begin
                             case (op3)
 
-
                                 `EXE_OR:    begin   // or rd, rs, rt
                                     wreg_o      <=      `WriteEnable;
                                     aluop_o     <=      `EXE_OR_OP;
@@ -301,5 +300,3 @@ module id(
     end
 
 endmodule
-
-
