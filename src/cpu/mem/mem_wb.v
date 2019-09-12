@@ -9,6 +9,16 @@ module mem_wb (
     input wire[`RegBus]         mem_wdata,
     input wire                  mem_wreg,
 
+    // HILO data from MEMORY stage
+    input wire[`RegBus]         mem_hi,
+    input wire[`RegBus]         mem_lo,
+    input wire                  mem_whilo,
+
+    // HILO data send to WriteBack stage
+    output reg[`RegBus]        wb_hi,
+    output reg[`RegBus]        wb_lo,
+    output reg                 wb_whilo,
+
     // Data send to write back stage
     output reg[`RegAddrBus]     wb_wd,
     output reg[`RegBus]         wb_wdata,
@@ -20,10 +30,16 @@ module mem_wb (
             wb_wd       <=      `NOPRegAddr;
             wb_wdata    <=      `ZeroWord;
             wb_wreg     <=      `WriteDisable;
+            wb_hi       <=      `ZeroWord;
+            wb_lo       <=      `ZeroWord;
+            wb_whilo    <=      `WriteDisable;
         end else begin
             wb_wd       <=      mem_wd;
             wb_wdata    <=      mem_wdata;
             wb_wreg     <=      mem_wreg;
+            wb_hi       <=      mem_hi;
+            wb_lo       <=      mem_lo;
+            wb_whilo    <=      mem_whilo;
         end
     end
     

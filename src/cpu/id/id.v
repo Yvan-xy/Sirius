@@ -34,7 +34,7 @@ module id(
 
     // fetch opcode and ifun
     // judge if the instruction is ori by checking 26-31bits
-    wire [5:0] op = inst_i[31:26];
+    wire [5:0] op  = inst_i[31:26];
     wire [4:0] op2 = inst_i[10:6];
     wire [5:0] op3 = inst_i[5:0];
     wire [4:0] op4 = inst_i[20:16];
@@ -149,6 +149,68 @@ module id(
                                     reg1_read_o <=      1'b0;
                                     reg2_read_o <=      1'b1;
                                     instvalid   <=      `InstValid;
+                                end
+
+                                `EXE_MFHI: begin    // MFHI rd
+                                    wreg_o      <=      `WriteEnable;
+                                    aluop_o     <=      `EXE_MFHI_OP;
+                                    alusel_o    <=      `EXE_RES_MOVE;
+                                    reg1_read_o <=      1'b0;
+                                    reg2_read_o <=      1'b0;
+                                    instvalid   <=      `InstValid;
+                                end
+
+                                `EXE_MFLO: begin    // MFLO rd
+                                    wreg_o      <=      `WriteEnable;
+                                    aluop_o     <=      `EXE_MFLO_OP;
+                                    alusel_o    <=      `EXE_RES_MOVE;
+                                    reg1_read_o <=      1'b0;
+                                    reg2_read_o <=      1'b0;
+                                    instvalid   <=      `InstValid;
+                                end
+
+                                `EXE_MTHI: begin    // MTHI rs
+                                    wreg_o      <=      `WriteDisable;
+                                    aluop_o     <=      `EXE_MTHI_OP;
+                                    alusel_o    <=      `EXE_RES_MOVE;
+                                    reg1_read_o <=      1'b1;
+                                    reg2_read_o <=      1'b0;
+                                    instvalid   <=      `InstValid;
+                                end
+
+                                `EXE_MTLO: begin    // MTLO rs
+                                    wreg_o      <=      `WriteDisable;
+                                    aluop_o     <=      `EXE_MTLO_OP;
+                                    alusel_o    <=      `EXE_RES_MOVE;
+                                    reg1_read_o <=      1'b1;
+                                    reg2_read_o <=      1'b0;
+                                    instvalid   <=      `InstValid;
+                                end
+
+                                `EXE_MOVN: begin    // movn rd, rs, rt
+                                    aluop_o     <=      `EXE_MOVN_OP;
+                                    alusel_o    <=      `EXE_RES_MOVE;
+                                    reg1_read_o <=      1'b1;
+                                    reg2_read_o <=      1'b1;
+                                    instvalid   <=      `InstValid;
+                                    if(reg2_o != `ZeroWord) begin
+                                        wreg_o  <=      `WriteEnable;
+                                    end else begin
+                                        wreg_o  <=      `WriteDisable;    
+                                    end
+                                end
+
+                                `EXE_MOVZ: begin    // movz rd, rs, rt
+                                    aluop_o     <=      `EXE_MOVZ_OP;
+                                    alusel_o    <=      `EXE_RES_MOVE;
+                                    reg1_read_o <=      1'b1;
+                                    reg2_read_o <=      1'b1;
+                                    instvalid   <=      `InstValid;
+                                    if(reg2_o == `ZeroWord) begin
+                                        wreg_o  <=      `WriteEnable;
+                                    end else begin
+                                        wreg_o  <=      `WriteDisable;    
+                                    end
                                 end
 
                                 default:    begin

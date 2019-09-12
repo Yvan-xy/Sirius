@@ -10,6 +10,25 @@ module ex(
     input wire[`RegAddrBus]     wd_i,
     input wire                  wreg_i,
 
+    // Data of HI and LO
+    input wire[`RegBus]         hi_i,
+    input wire[`RegBus]         lo_i,
+
+    // Enable signal of write HILO from WRITEBACK stage
+    input wire[`RegBus]         wb_hi_i,
+    input wire[`RegBus]         wb_lo_i,
+    input wire                  wb_whilo_i,
+
+    // Enable signal of write HILO from MEMROY stage
+    input wire[`RegBus]         mem_hi_i,       // value of HI to write
+    input wire[`RegBus]         mem_lo_i,       // value of LO to write
+    input wire                  mem_whilo_i,    // Write Enable signal
+
+    // Request of writeing to HI and LO
+    output reg[`RegBus]         hi_o,           // value of HI to write
+    output reg[`RegBus]         lo_o,           // value of LO to write
+    output reg                  whilo_o,        // Write Enable signal
+
     // Execute result
     output reg[`RegBus]         wdata_o,
     output reg[`RegAddrBus]     wd_o,
@@ -23,6 +42,25 @@ module ex(
     // The result of shift operation 
     reg[`RegBus] shiftres;
 
+    // The result of move operation
+    reg[`RegBus] moveres;
+
+    // Lastest value of HILO
+    reg[`RegBus] HI;
+    reg[`RegBus] LO;
+
+    /****    Fetch the lastest value of HILO   ****/
+    always @ (*) begin
+        if(rst == `RstEnable) begin
+            {HI, LO} <= {`ZeroWord, `ZeroWord};    
+        end else if(mem_whilo_i == `WriteEnable) begin
+            {HI, LO} <= {mem_hi_i, mem_lo_i};    
+        end else if (wb_whilo_i == `WriteEnable) begin
+            {HI, LO} <= {wb_hi_i, wb_lo_i};    
+        end else begin
+            {HI, LO} <= {hi_i, lo_i};    
+        end
+    end
 
     /****    According to 'aluop_i',execute 'or' operation    ****/
     always @ (*) begin
@@ -72,6 +110,30 @@ module ex(
         end
     end
 
+    always @ (*) begin
+        if(rst == `RstEnable) begin
+            moveres <= `ZeroWord;     
+        end else begin
+            moveres <= `ZeroWord;
+            case (aluop_i)
+                `EXE_MFHI_OP: begin
+                    moveres <= HI;    
+                end
+                `EXE_MFLO_OP: begin
+                    moveres <= LO;    
+                end
+                `EXE_MOVZ_OP: begin
+                    moveres <= reg1_i;
+                end
+                `EXE_MOVN_OP: begin
+                    moveres <= reg1_i;
+                end
+                default: begin
+                end
+            endcase
+        end
+    end
+
     /****    According to 'alusel_i, select the result    ****/
     always @ (*) begin
         wd_o        <=      wd_i;
@@ -83,10 +145,33 @@ module ex(
             `EXE_RES_SHIFT: begin
                 wdata_o <= shiftres;
             end
+            `EXE_RES_MOVE: begin
+                wdata_o <= moveres;
+            end
             default: begin
                 wdata_o <= `ZeroWord;
             end
         endcase
+    end
+
+    always @ (*) begin
+        if(rst == `RstEnable) begin
+            whilo_o <=  `WriteDisable;
+            hi_o    <=  `ZeroWord;
+            lo_o    <=  `ZeroWord; 
+        end else if (aluop_i == `EXE_MTHI_OP) begin
+            whilo_o <=  `WriteEnable;
+            hi_o    <=  reg1_i;
+            lo_o    <=  LO; 
+        end else if (aluop_i == `EXE_MTLO_OP) begin
+            whilo_o <=  `WriteEnable;
+            hi_o    <=  HI;
+            lo_o    <=  reg1_i;
+        end else begin
+            whilo_o <=  `WriteDisable;
+            hi_o    <=  `ZeroWord;
+            lo_o    <=  `ZeroWord;
+        end
     end
 
 endmodule

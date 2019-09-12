@@ -56,6 +56,30 @@ module Sirius(
     wire[`RegAddrBus]   reg1_addr;
     wire[`RegAddrBus]   reg2_addr;
 
+    // HILO data from MEMORY stage
+    wire[`RegBus]       mem_hi_o;
+    wire[`RegBus]       mem_lo_o;
+    wire                mem_whilo_o;
+
+    // HILO to Ex stage
+    wire[`RegBus]       hi_o;
+    wire[`RegBus]       lo_o;
+
+    // HILO result data from EX stage to MEMORY stage
+    wire[`RegBus]       ex_hi_i;
+    wire[`RegBus]       ex_lo_i;
+    wire                ex_whilo_i;
+
+    // HILO result data from EX/MEM stage to MEM
+    wire[`RegBus]       ex_hi_o;
+    wire[`RegBus]       ex_lo_o;
+    wire                ex_whilo_o;
+
+    // HILO data from MEM to MEM/WB
+    wire[`RegBus]       wb_hi_i;
+    wire[`RegBus]       wb_lo_i;
+    wire                wb_whilo_i;
+
     // Instantiate the pc_reg
     pc_reg pc_reg0(
         .clk(clk),
@@ -160,6 +184,25 @@ module Sirius(
         .wd_i(ex_wd_i),
         .wreg_i(ex_wreg_i),
         
+        // HILO data from register
+        .hi_i(hi_o),
+        .lo_i(lo_o),
+
+        // HILO data from WriteBack stage
+        .wb_hi_i(wb_hi_i),
+        .wb_lo_i(wb_lo_i),
+        .wb_whilo_i(wb_whilo_i),
+
+        // HILO data from MEMORY stage
+        .mem_hi_i(mem_hi_o),
+        .mem_lo_i(mem_lo_o),
+        .mem_whilo_i(mem_whilo_o),
+        
+        // Result data of HILO 
+        .hi_o(ex_hi_o),
+        .lo_o(ex_lo_o),
+        .whilo_o(ex_whilo_o),
+
         // Output data to EX/MEM
         .wd_o(ex_wd_o),
         .wreg_o(ex_wreg_o),
@@ -176,6 +219,16 @@ module Sirius(
         .ex_wreg(ex_wreg_o),
         .ex_wdata(ex_wdata_o),
 
+        // HILO data from EX stage
+        .ex_hi(ex_hi_i),
+        .ex_lo(ex_lo_i),
+        .ex_whilo(ex_whilo_i),
+
+        // HILO data send to MEMORY stage
+        .mem_hi(ex_hi_o),
+        .mem_lo(ex_hi_o),
+        .mem_whilo(ex_whilo_o),
+
         // Output data to MEM
         .mem_wd(mem_wd_i),
         .mem_wreg(mem_wreg_i),
@@ -190,6 +243,16 @@ module Sirius(
         .wd_i(mem_wd_i),
         .wreg_i(mem_wreg_i),
         .wdata_i(mem_wdata_i),
+
+        // HILO data from EX/MEM
+        .hi_i(ex_hi_o),
+        .lo_i(ex_lo_o),
+        .whilo_i(ex_whilo_o),
+
+        // HILO data to MEM/WB
+        .hi_o(wb_hi_i),
+        .lo_o(wb_lo_i),
+        .whilo_o(wb_whilo_i),
 
         // Output data to MEM/WB
         .wd_o(mem_wd_o),
@@ -211,6 +274,20 @@ module Sirius(
         .wb_wd(wb_wd_i),
         .wb_wreg(wb_wreg_i),
         .wb_wdata(wb_wdata_i)
+    );
+
+    hilo_reg hilo_reg1(
+        .clk(clk),
+        .rst(rst),
+
+        // Data from WB/MEM register
+        .we(wb_whilo_i),
+        .hi_i(wb_hi_i),
+        .lo_i(wb_lo_i),
+
+        // Data to EX stage
+        .hi_o(hi_o),
+        .lo_o(lo_o)
     );
 
 endmodule
