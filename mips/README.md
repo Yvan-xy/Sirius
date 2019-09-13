@@ -4,7 +4,7 @@
 ### Assembly
 ---
 ```sh
-mipsel-linux-gnu-as -EB -o a.o a.s
+mipsel-linux-gnu-as -EB -march=mips32 a.s -o a.o
 ```
 The `-EB` option is big endian choice.
 
@@ -177,6 +177,7 @@ We can write a makefile to implement automation:
 
 ```makefile
 ifndef CROSS_COMPILE
+        CFLAGS = -march=mips32
         CROSS_COMPILE = mipsel-linux-gnu-
 endif
 

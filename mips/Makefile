@@ -1,5 +1,7 @@
 ifndef CROSS_COMPILE
 	CROSS_COMPILE = mipsel-linux-gnu-
+	CFLAGS = -march=mips32
+	# CROSS_COMPILE = mips64el-linux-gnuabi64-
 endif
 
 CC = $(CROSS_COMPILE)as
@@ -15,7 +17,7 @@ export CROSS_COMPILE
 all: inst_rom.data
 
 %.o: %.s
-	$(CC) -EB -o $@ $<
+	$(CC) -EB $(CFLAGS) $< -o $@
 
 inst_rom.om: $(OBJECTS)
 	$(LD) -EB -o inst_rom.om inst_rom.o 
