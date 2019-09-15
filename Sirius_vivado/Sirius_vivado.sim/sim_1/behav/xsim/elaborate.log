@@ -16,6 +16,7 @@ WARNING: [XSIM 43-4099] "D:/code/Sirius/src/cpu/ex/ex.v" Line 2. Module ex doesn
 WARNING: [XSIM 43-4099] "D:/code/Sirius/src/cpu/ex/ex_mem.v" Line 3. Module ex_mem doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "D:/code/Sirius/src/cpu/mem/mem.v" Line 3. Module mem doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "D:/code/Sirius/src/cpu/mem/mem_wb.v" Line 3. Module mem_wb doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/code/Sirius/src/register/hilo_reg.v" Line 3. Module hilo_reg doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "D:/code/Sirius/src/inst_rom.v" Line 1. Module inst_rom doesn't have a timescale but at least one module in design has a timescale.
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
@@ -28,6 +29,7 @@ Compiling module xil_defaultlib.ex
 Compiling module xil_defaultlib.ex_mem
 Compiling module xil_defaultlib.mem
 Compiling module xil_defaultlib.mem_wb
+Compiling module xil_defaultlib.hilo_reg
 Compiling module xil_defaultlib.Sirius
 Compiling module xil_defaultlib.inst_rom
 Compiling module xil_defaultlib.cpu_top

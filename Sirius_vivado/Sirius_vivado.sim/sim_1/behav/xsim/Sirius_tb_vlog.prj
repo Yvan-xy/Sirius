@@ -4,6 +4,7 @@ verilog xil_defaultlib  \
 "../../../../../src/cpu_top.v" \
 "../../../../../src/cpu/ex/ex.v" \
 "../../../../../src/cpu/ex/ex_mem.v" \
+"../../../../../src/register/hilo_reg.v" \
 "../../../../../src/cpu/id/id.v" \
 "../../../../../src/cpu/id/id_ex.v" \
 "../../../../../src/cpu/if/if_id.v" \

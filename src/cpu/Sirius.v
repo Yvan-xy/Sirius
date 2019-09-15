@@ -276,7 +276,7 @@ module Sirius(
         .wb_wdata(wb_wdata_i)
     );
 
-    hilo_reg hilo_reg1(
+    hilo_reg hilo_reg0(
         .clk(clk),
         .rst(rst),
 
