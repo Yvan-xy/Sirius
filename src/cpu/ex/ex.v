@@ -53,12 +53,13 @@ module ex(
     wire                    ov_sum;             // Save the state of overflow
     wire                    reg1_eq_reg2;       // If reg1 == reg2
     wire                    reg1_lt_reg2;       // If reg1 < reg2 
-    reg [`RegBus]            arithmeticres;      // Save the result of arithmetic
+    reg [`RegBus]           arithmeticres;      // Save the result of arithmetic
     wire[`RegBus]           reg2_i_mux;         // Save the complement code of reg2_i
     wire[`RegBus]           reg1_i_not;         // Save ~reg1_i
     wire[`RegBus]           result_sum;         // Save the result of "add" operation
     wire[`RegBus]           opdata1_mult;       // Multipilicand in "Multiply" operation
     wire[`RegBus]           opdata2_mult;       // Multipilier in "Multiply" operation
+    wire[`RegBus]           hilo_temp;          // Save temp result
     wire[`DoubleRegBus]     mulres;             // Result of "Multiply" operation 
 
     /****    Fetch the lastest value of HILO   ****/
@@ -145,6 +146,71 @@ module ex(
             endcase
         end
     end
+
+
+    /****   Arithmetic   ****/
+
+    /*          stage one           */
+
+    // If opcode if "SUB", assign the complement code of reg2_i to reg2_i_mux.
+    // Otherwise reg2_i_mux equals to reg2_i.
+    assign reg2_i_mux = ((aluop_i == `EXE_SUB_OP)  ||
+                         (aluop_i == `EXE_SUBU_OP) ||
+                         (aluop_i == `EXE_SLT_OP)) ?
+                         (~reg2_i) + 1 : reg2_i;
+
+
+    /*
+    *   1. If operation is "add", reg2_i_mux is just the second operand
+    *   reg2_i and the "result_sum" is its result.
+    *   
+    *   2. If operation is "sub", reg2_i_mux is the complement code of 
+    *   reg2_i.So the "result_sum" is its result.
+    *
+    *   3. If operation is "slt", which compare two numbers,reg2_i_mux 
+    *   is also the complement code of reg2_i.Because you can do sub operate
+    *   to get the comparison result.
+    */
+
+    assign result_sum = reg1_i + reg2_i_mux;
+
+    /*
+    *   Judge if the result of "add" or "sub" is overflow:
+    *   
+    *   1. reg1_i is positive number and reg2_i is positive number, but the
+    *   result of "add" operation is negative.
+    *   
+    *   2. reg1_i is negative number and reg2_i is negative number, but the
+    *   result of "sub" operation is positive.
+    */
+
+    assign ov_sum = ((!reg1_i[31] && !reg2_i_mux[31]) && result_sum[31]) || 
+                    ((reg1_i[31] && reg2_i_mux[31]) && (!result_sum[31]));
+
+    /*
+    *   Judge if oprand 1 is less than oprand 2:
+    *
+    *   1. aluop_i is EXE_SLT_OP 
+    *       
+    *       1) reg1_i is negative and reg2_i is positive, then reg1_i < reg2_i
+    *
+    *       2) reg1_i is positive and reg2_i is positive, meanwhile reg1_i - reg2_i < 0
+    *       (result_sum < 0), then reg1_i < reg2_i
+    *
+    *       3) reg1_i is negative and reg2_i is negative, meanwhile reg1_i - reg2_i < 0
+    *       (result_sum < 0), then reg1_i < reg2_i
+    *   
+    *   2. aluop_i is EXE_SLTU_OP, just use "<" to Judge two numbers 
+    */
+
+    assign reg1_lt_reg2 = (aluop_i  ==  `EXE_SLT_OP) ?
+                            ((reg1_i[31]  &&  !reg2_i[31])  ||
+                             (!reg1_i[31]  &&  !reg2_i[31]  &&  result_sum[31])  ||
+                             (reg1_i[31]  && reg2_i[31]  &&  result_sum[31])) : (reg1_i < reg2_i);
+
+    assign reg1_i_not = ~reg1_i;
+
+    /*          stage two           */
 
     /****    According to 'alusel_i, select the result    ****/
     always @ (*) begin
