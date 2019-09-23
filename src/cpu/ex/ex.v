@@ -49,6 +49,18 @@ module ex(
     reg[`RegBus] HI;
     reg[`RegBus] LO;
 
+    // 
+    wire                    ov_sum;             // Save the state of overflow
+    wire                    reg1_eq_reg2;       // If reg1 == reg2
+    wire                    reg1_lt_reg2;       // If reg1 < reg2 
+    reg [`RegBus]            arithmeticres;      // Save the result of arithmetic
+    wire[`RegBus]           reg2_i_mux;         // Save the complement code of reg2_i
+    wire[`RegBus]           reg1_i_not;         // Save ~reg1_i
+    wire[`RegBus]           result_sum;         // Save the result of "add" operation
+    wire[`RegBus]           opdata1_mult;       // Multipilicand in "Multiply" operation
+    wire[`RegBus]           opdata2_mult;       // Multipilier in "Multiply" operation
+    wire[`DoubleRegBus]     mulres;             // Result of "Multiply" operation 
+
     /****    Fetch the lastest value of HILO   ****/
     always @ (*) begin
         if(rst == `RstEnable) begin
