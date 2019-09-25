@@ -60,7 +60,7 @@ module ex(
     wire[`RegBus]           opdata1_mult;       // Multipilicand in "Multiply" operation
     wire[`RegBus]           opdata2_mult;       // Multipilier in "Multiply" operation
     wire[`RegBus]           hilo_temp;          // Save temp result
-    wire[`DoubleRegBus]     mulres;             // Result of "Multiply" operation 
+    reg [`DoubleRegBus]     mulres;             // Result of "Multiply" operation 
 
     /****    Fetch the lastest value of HILO   ****/
     always @ (*) begin
@@ -301,10 +301,41 @@ module ex(
     // Save the temp_result
     assign hilo_temp = opdata1_mult * opdata2_mult;
 
-    /****    According to 'alusel_i, select the result    ****/
+    /*
+    *   Fix the multiply result, save the result to "mulres": 
+    *   
+    *   1. If aluop_i is mult or mul,then we need to fix the temp_result:
+    *       A. If multiplicand and multiplier have different signs, we need to
+    *       take the complement code of hilo_temp as the result.
+    *
+    *       B. If Multipilicand and Multiplier have the same sign, hilo_temp
+    *       is the final result.
+    *
+    *   2. If aluop_i is multu, then hilo_temp is the final result.       
+    */
     always @ (*) begin
-        wd_o        <=      wd_i;
-        wreg_o      <=      wreg_i;
+        if(rst == `RstEnable) begin
+            mulres <= {`ZeroWord, `ZeroWord};    
+        end else if((aluop_i == `EXE_MULT_OP) || (aluop_i == `EXE_MUL_OP)) begin
+            if(reg1_i[31] ^ reg2_i[31] == 1'b1) begin
+                mulres <= ~hilo_temp + 1;    
+            end else begin
+                mulres <= hilo_temp;    
+            end
+        end else begin
+            mulres <= hilo_temp;    
+        end
+    end
+
+    /****    According to 'alusel_i', select the result    ****/
+    always @ (*) begin
+        wd_o <= wd_i;
+        if(((aluop_i == `EXE_ADD_OP) || (aluop_i == `EXE_ADDI_OP) ||
+            (aluop_i == `EXE_SUB_OP)) && (ov_sum == 1'b1)) begin
+            wreg_o <= `WriteDisable;    
+        end else begin
+            wreg_o <= wreg_i;
+        end
         case (alusel_i)
             `EXE_RES_LOGIC: begin
                 wdata_o <= logicout;
@@ -314,6 +345,12 @@ module ex(
             end
             `EXE_RES_MOVE: begin
                 wdata_o <= moveres;
+            end
+            `EXE_RES_ARITHMETIC: begin
+                wdata_o <= arithmeticres;    
+            end
+            `EXE_RES_MUL: begin
+                wdata_o <= mulres[31:0];    
             end
             default: begin
                 wdata_o <= `ZeroWord;
@@ -326,6 +363,11 @@ module ex(
             whilo_o <=  `WriteDisable;
             hi_o    <=  `ZeroWord;
             lo_o    <=  `ZeroWord; 
+        end else if ((aluop_i == `EXE_MULT_OP) ||
+                     (aluop_i == `EXE_MULTU_OP)) begin
+            whilo_o <= `WriteEnable;
+            hi_o    <= mulres[63:32];
+            lo_o    <= mulres[31:0];
         end else if (aluop_i == `EXE_MTHI_OP) begin
             whilo_o <=  `WriteEnable;
             hi_o    <=  reg1_i;
