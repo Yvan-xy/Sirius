@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="Sirius_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="Sirius_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="1000000fs"></ZoomEndTime>
+      <Cursor1Time time="253370fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="101"></NameColumnWidth>
+      <ValueColumnWidth column_width="97"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="8" />
+   <wvobject type="logic" fp_name="/Sirius_tb/CLOCK_50">
+      <obj_property name="ElementShortName">CLOCK_50</obj_property>
+      <obj_property name="ObjectShortName">CLOCK_50</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Sirius_tb/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Sirius_tb/cpu_top0/Sirius/mem0/hi_o">
+      <obj_property name="ElementShortName">hi_o[31:0]</obj_property>
+      <obj_property name="ObjectShortName">hi_o[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Sirius_tb/cpu_top0/Sirius/id0/reg1_read_o">
+      <obj_property name="ElementShortName">reg1_read_o</obj_property>
+      <obj_property name="ObjectShortName">reg1_read_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Sirius_tb/cpu_top0/Sirius/id0/wreg_o">
+      <obj_property name="ElementShortName">wreg_o</obj_property>
+      <obj_property name="ObjectShortName">wreg_o</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Sirius_tb/cpu_top0/Sirius/id0/reg1_data_i">
+      <obj_property name="ElementShortName">reg1_data_i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">reg1_data_i[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Sirius_tb/cpu_top0/Sirius/id0/reg1_addr_o">
+      <obj_property name="ElementShortName">reg1_addr_o[4:0]</obj_property>
+      <obj_property name="ObjectShortName">reg1_addr_o[4:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Sirius_tb/cpu_top0/Sirius/id0/inst_i">
+      <obj_property name="ElementShortName">inst_i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">inst_i[31:0]</obj_property>
+   </wvobject>
+</wave_config>

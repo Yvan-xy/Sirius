@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="impl_1" LaunchPart="xc7k70tfbv676-1" LaunchTime="1567497997">
-  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
-  <File Type="BG-DRC" Name="Sirius_tb.drc"/>
-  <File Type="BITSTR-NKY" Name="Sirius_tb.nky"/>
-  <File Type="BITSTR-RBT" Name="Sirius_tb.rbt"/>
-  <File Type="BG-BIT" Name="Sirius_tb.bit"/>
-  <File Type="RDI-RDI" Name="Sirius_tb.vdi"/>
-  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="Sirius_tb_postroute_physopt_bb.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-DCP" Name="Sirius_tb_postroute_physopt.dcp"/>
-  <File Type="ROUTE-TIMING-PB" Name="Sirius_tb_timing_summary_routed.pb"/>
   <File Type="BITSTR-SYSDEF" Name="Sirius_tb.sysdef"/>
   <File Type="BITSTR-MMI" Name="Sirius_tb.mmi"/>
-  <File Type="BITSTR-LTX" Name="Sirius_tb.ltx"/>
   <File Type="PWROPT-DCP" Name="Sirius_tb_pwropt.dcp"/>
-  <File Type="OPT-HWDEF" Name="Sirius_tb.hwdef"/>
+  <File Type="BITSTR-LTX" Name="Sirius_tb.ltx"/>
   <File Type="REPORTS-TCL" Name="Sirius_tb_reports.tcl"/>
+  <File Type="BITSTR-RBT" Name="Sirius_tb.rbt"/>
+  <File Type="ROUTE-TIMING-PB" Name="Sirius_tb_timing_summary_routed.pb"/>
+  <File Type="PA-TCL" Name="Sirius_tb.tcl"/>
+  <File Type="BITSTR-MSK" Name="Sirius_tb.msk"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="Sirius_tb_postplace_pwropt.dcp"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <File Type="RDI-RDI" Name="Sirius_tb.vdi"/>
+  <File Type="BG-DRC" Name="Sirius_tb.drc"/>
+  <File Type="ROUTE-ERROR-DCP" Name="Sirius_tb_routed_error.dcp"/>
+  <File Type="OPT-HWDEF" Name="Sirius_tb.hwdef"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="Sirius_tb_postroute_physopt.dcp"/>
+  <File Type="BITSTR-NKY" Name="Sirius_tb.nky"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="Sirius_tb_postroute_physopt_bb.dcp"/>
   <File Type="PLACE-DCP" Name="Sirius_tb_placed.dcp"/>
+  <File Type="BG-BIT" Name="Sirius_tb.bit"/>
   <File Type="OPT-DRC" Name="Sirius_tb_drc_opted.rpt"/>
   <File Type="BITSTR-BMM" Name="Sirius_tb_bd.bmm"/>
   <File Type="PLACE-PRE-SIMILARITY" Name="Sirius_tb_incremental_reuse_pre_placed.rpt"/>
   <File Type="OPT-DCP" Name="Sirius_tb_opt.dcp"/>
-  <File Type="PA-TCL" Name="Sirius_tb.tcl"/>
-  <File Type="BITSTR-MSK" Name="Sirius_tb.msk"/>
   <File Type="BG-BGN" Name="Sirius_tb.bgn"/>
   <File Type="ROUTE-BLACKBOX-DCP" Name="Sirius_tb_routed_bb.dcp"/>
-  <File Type="POSTPLACE-PWROPT-DCP" Name="Sirius_tb_postplace_pwropt.dcp"/>
   <File Type="BG-BIN" Name="Sirius_tb.bin"/>
   <File Type="PHYSOPT-DCP" Name="Sirius_tb_physopt.dcp"/>
-  <File Type="ROUTE-ERROR-DCP" Name="Sirius_tb_routed_error.dcp"/>
   <File Type="ROUTE-DCP" Name="Sirius_tb_routed.dcp"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
