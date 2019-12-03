@@ -243,7 +243,7 @@ module ex(
                                      reg1_i[3]  ? 28: reg1_i[2]  ? 29:
                                      reg1_i[1]  ? 30: reg1_i[0]  ? 31:32;
                 end
-                `EXE_CLZ_OP: begin
+                `EXE_CLO_OP: begin
                     arithmeticres <= (
                         reg1_i_not[31] ? 0 :
                         reg1_i_not[30] ? 1 :

@@ -93,8 +93,6 @@
 `define EXE_SUBU_OP     8'b00100011
 `define EXE_SLT_OP      8'b00101010
 `define EXE_SLTU_OP     8'b00101011
-`define EXE_SLTI_OP     8'b01010111
-`define EXE_SLTIU_OP    8'b01011000
 `define EXE_CLZ_OP      8'b10110000
 `define EXE_CLO_OP      8'b10110001
 `define EXE_MULT_OP     8'b00011000
