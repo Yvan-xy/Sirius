@@ -24,6 +24,17 @@ module ex(
     input wire[`RegBus]         mem_lo_i,       // value of LO to write
     input wire                  mem_whilo_i,    // Write Enable signal
 
+    // Data from ex_mem
+    input wire[`DoubleRegBus]   hilo_temp_i,
+    input wire[1:0]             cnt_i,
+
+    // Data to ex_mem of mult-arithmetic
+    output reg[`DoubleRegBus]   hilo_temp_o,
+    output reg[1:0]             cnt_o,
+
+    // Stall request
+    output reg                  stallreq,
+
     // Request of writeing to HI and LO
     output reg[`RegBus]         hi_o,           // value of HI to write
     output reg[`RegBus]         lo_o,           // value of LO to write
@@ -60,7 +71,13 @@ module ex(
     wire[`RegBus]           opdata1_mult;       // Multipilicand in "Multiply" operation
     wire[`RegBus]           opdata2_mult;       // Multipilier in "Multiply" operation
     wire[`RegBus]           hilo_temp;          // Save temp result
+    reg [`RegBus]           hilo_temp1;         // Save temp result of the second cycle
     reg [`DoubleRegBus]     mulres;             // Result of "Multiply" operation 
+    reg                     stallreq_for_madd_msub;
+
+    always @ (*) begin
+        stallreq <= stallreq_for_madd_msub;    
+    end
 
     /****    Fetch the lastest value of HILO   ****/
     always @ (*) begin
@@ -291,12 +308,18 @@ module ex(
     /****           stage three         ****/
 
     // If Multiplicand is negative, then take its complement code.
-    assign opdata1_mult = (((aluop_i == `EXE_MUL_OP) || (aluop_i == `EXE_MULT_OP))
-                            && (reg1_i[31] == 1'b1)) ? (~reg1_i + 1) : reg1_i;
+    assign opdata1_mult = (((aluop_i == `EXE_MUL_OP)  || 
+                            (aluop_i == `EXE_MULT_OP) ||
+                            (aluop_i == `EXE_MADD_OP) ||
+                            (aluop_i == `EXE_MSUB_OP))&& 
+                            (reg1_i[31] == 1'b1)) ? (~reg1_i + 1) : reg1_i;
 
     // If Multiplier is negative, then take its complement code.
-    assign opdata2_mult = (((aluop_i == `EXE_MUL_OP) || (aluop_i == `EXE_MULT_OP))
-                            && (reg2_i[31] == 1'b1)) ? (~reg2_i + 1) : reg2_i;
+    assign opdata2_mult = (((aluop_i == `EXE_MUL_OP)  || 
+                            (aluop_i == `EXE_MULT_OP) ||
+                            (aluop_i == `EXE_MADD_OP) ||
+                            (aluop_i == `EXE_MSUB_OP))&&
+                            (reg2_i[31] == 1'b1)) ? (~reg2_i + 1) : reg2_i;
 
     // Save the temp_result
     assign hilo_temp = opdata1_mult * opdata2_mult;
@@ -316,7 +339,10 @@ module ex(
     always @ (*) begin
         if(rst == `RstEnable) begin
             mulres <= {`ZeroWord, `ZeroWord};    
-        end else if((aluop_i == `EXE_MULT_OP) || (aluop_i == `EXE_MUL_OP)) begin
+        end else if((aluop_i == `EXE_MULT_OP) || 
+                    (aluop_i == `EXE_MUL_OP)  ||
+                    (aluop_i == `EXE_MADD_OP) ||
+                    (aluop_i == `EXE_MSUB_OP)) begin
             if(reg1_i[31] ^ reg2_i[31] == 1'b1) begin
                 mulres <= ~hilo_temp + 1;    
             end else begin
@@ -327,11 +353,48 @@ module ex(
         end
     end
 
+    always @ (*) begin
+        if(rst == `RstEnable) begin
+            hilo_temp_o <= {`ZeroWord, `ZeroWord};
+            cnt_o       <= 2'b00;
+            stallreq_for_madd_msub <= `NoStop;
+        end else begin
+            case (aluop_i)
+                `EXE_MADD_OP, `EXE_MADDU_OP: begin  // madd maddu instruction
+                    if(cnt_i == 2'b00) begin        // First cycle
+                        hilo_temp_o <= mulres;
+                        cnt_o       <= 2'b01;
+                        hilo_temp1  <= {`ZeroWord, `ZeroWord};
+                        stallreq_for_madd_msub <= `Stop;
+                    end else if(cnt_i == 2'b01) begin           // Second cycle
+                        hilo_temp_o <= {`ZeroWord, `ZeroWord};
+                        cnt_o       <=  2'b10;
+                        hilo_temp1  <= hilo_temp_i + {HI, LO};
+                        stallreq_for_madd_msub <= `NoStop;
+                    end
+                end
+
+                `EXE_MSUB_OP, `EXE_MSUBU_OP: begin  // msub msubu instruction
+                    if(cnt_i == 2'b00) begin        // First cycle
+                        hilo_temp_o <= ~mulres + 1;
+                        cnt_o       <= 2'b01;
+                        stallreq_for_madd_msub <= `Stop;
+                    end else if(cnt_i == 2'b01) begin   // Second cycle
+                        hilo_temp_o <=  ~mulres + 1;
+                        cnt_o       <= 2'b10;
+                        hilo_temp1  <= hilo_temp_i + {HI, LO};
+                        stallreq_for_madd_msub <= `NoStop;
+                    end
+                end
+
+            endcase
+    end
+
     /****    According to 'alusel_i', select the result    ****/
     always @ (*) begin
         wd_o <= wd_i;
         if(((aluop_i == `EXE_ADD_OP) || (aluop_i == `EXE_ADDI_OP) ||
-            (aluop_i == `EXE_SUB_OP)) && (ov_sum == 1'b1)) begin
+            (aluop_i == `EXE_SUB_OP)) && (ov_sum == 1'b1)) begin        // check overflow
             wreg_o <= `WriteDisable;    
         end else begin
             wreg_o <= wreg_i;
@@ -363,6 +426,16 @@ module ex(
             whilo_o <=  `WriteDisable;
             hi_o    <=  `ZeroWord;
             lo_o    <=  `ZeroWord; 
+        end else if((aluop_i == `EXE_MSUB_OP)  ||
+                    (aluop_i == `EXE_MSUBU_OP)) begin
+            whilo_o <=  `WriteEnable;
+            hi_o    <=  hilo_temp1[63:32];
+            lo_o    <=  hilo_temp1[31:0];
+        end else if((aluop_i == `EXE_MADD_OP)  ||
+                    (aluop_i == `EXE_MADDU_OP)) begin
+            whilo_o <=  `WriteEnable;
+            hi_o    <=  hilo_temp1[63:32];
+            lo_o    <=  hilo_temp1[31:0];
         end else if ((aluop_i == `EXE_MULT_OP) ||
                      (aluop_i == `EXE_MULTU_OP)) begin
             whilo_o <= `WriteEnable;

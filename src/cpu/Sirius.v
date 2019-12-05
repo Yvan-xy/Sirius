@@ -80,10 +80,25 @@ module Sirius(
     wire[`RegBus]       wb_lo_i;
     wire                wb_whilo_i;
 
+    // Signal from CTRL
+    wire[5:0]           stall;
+
+    // Instantiate CTRL
+    ctrl ctrl0(
+        /***** INPUT *****/
+        .rst(rst),
+        .stallreq_from_id(stallreq_from_id),
+        .stallreq_from_ex(stallreq_from_ex),
+
+        /***** OUTPUT *****/
+        .stall(stall)
+    )
+
     // Instantiate the pc_reg
     pc_reg pc_reg0(
         .clk(clk),
         .rst(rst),
+        .stall(stall),
         .pc(pc),
         .ce(rom_ce_o)
     );    
@@ -95,12 +110,16 @@ module Sirius(
         .rst(rst),
         .if_pc(pc),
         .if_inst(rom_data_i),
+        .stall(stall),
         .id_pc(id_pc_i),
         .id_inst(id_inst_i)
     );
     
+    wire stallreq_from_id;
+
     // Instantiate the ID
     id id0(
+        /***** INPUT *****/
         .rst(rst),
         .pc_i(id_pc_i),
         .inst_i(id_inst_i),
@@ -119,6 +138,8 @@ module Sirius(
         .mem_wdata_i(mem_wdata_o),
         .mem_wd_i(mem_wd_o),
 
+        /***** OUTPUT *****/
+
         // Output data to Regfile
         .reg1_read_o(reg1_read),
         .reg2_read_o(reg2_read),
@@ -131,7 +152,9 @@ module Sirius(
         .reg1_o(id_reg1_o),
         .reg2_o(id_reg2_o),
         .wd_o(id_wd_o),
-        .wreg_o(id_wreg_o)
+        .wreg_o(id_wreg_o),
+
+        .stallreq(stallreq_from_id)
     );
 
     // Instantiate the Regfile
@@ -163,6 +186,9 @@ module Sirius(
         .id_wd(id_wd_o),
         .id_wreg(id_wreg_o),
 
+        // Signal from CTRL
+        .stall(stall),
+
         // Output data to EX
         .ex_aluop(ex_aluop_i),
         .ex_alusel(ex_alusel_i),
@@ -172,8 +198,16 @@ module Sirius(
         .ex_wreg(ex_wreg_i)
     );
 
+    wire                stallreq_from_ex;
+    wire[`DoubleRegBus] hilo_temp_to_ex;
+    wire[1:0]           cnt_to_ex;
+
+    wire[`DoubleRegBus] hilo_temp_to_ex_mem;
+    wire[1:0]           cnt_to_ex_mem;
+
     // Instantiate EX
     ex ex0(
+        /***** INPUT *****/
         .rst(rst),
 
         // Input data from ID/EX
@@ -198,6 +232,19 @@ module Sirius(
         .mem_lo_i(mem_lo_o),
         .mem_whilo_i(mem_whilo_o),
         
+        // HILO data from EX_MEM
+        .hilo_temp_i(hilo_temp_to_ex),
+        .cnt_i(cnt_to_ex),
+
+        /***** OUTPUT *****/
+
+        // HILO data to EX_MEM
+        .hilo_temp_o(hilo_temp_to_ex_mem),
+        .cnt_o(cnt_to_ex_mem),
+
+        // Stall request to ctrl
+        .stallreq(stallreq_from_ex),
+
         // Result data of HILO 
         .hi_o(ex_hi_o),
         .lo_o(ex_lo_o),
@@ -211,6 +258,7 @@ module Sirius(
 
     // Instantiate EX/MEM
     ex_mem ex_mem0(
+        /***** INPUT *****/
         .clk(clk),
         .rst(rst),
 
@@ -228,6 +276,19 @@ module Sirius(
         .mem_hi(ex_hi_o),
         .mem_lo(ex_hi_o),
         .mem_whilo(ex_whilo_o),
+
+        // Signal from CTRL
+        .stall(stall),
+
+        // HILO from EX
+        .hilo_i(hilo_temp_to_ex_mem),
+        .cnt_i(cnt_to_ex_mem),
+
+        /***** OUTPUT *****/
+
+        // HILO to EX
+        .hilo_o(hilo_temp_to_ex),
+        .cnt_o(cnt_to_ex),
 
         // Output data to MEM
         .mem_wd(mem_wd_i),
@@ -269,6 +330,9 @@ module Sirius(
         .mem_wd(mem_wd_o),
         .mem_wreg(mem_wreg_o),
         .mem_wdata(mem_wdata_o),
+
+        // Signal from CTRL
+        .stall(stall),
 
         // Output data to Write Back
         .wb_wd(wb_wd_i),

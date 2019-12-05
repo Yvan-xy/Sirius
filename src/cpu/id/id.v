@@ -29,11 +29,12 @@ module id(
     output  reg [`RegBus]           reg1_o,          // The source "reg_1" in decode stage
     output  reg [`RegBus]           reg2_o,          // The source "reg_2" in decode stage
     output  reg [`RegAddrBus]       wd_o,            // The address of destination in Regfile in decode stage
-    output  reg                     wreg_o           // if exist destination to write back
+    output  reg                     wreg_o,          // If exist destination to write back
+
+    output reg                      stallreq         // Stall request
 );
 
     // fetch opcode and ifun
-    // judge if the instruction is ori by checking 26-31bits
     wire [5:0] op  = inst_i[31:26];
     wire [4:0] op2 = inst_i[10:6];
     wire [5:0] op3 = inst_i[5:0];
@@ -44,6 +45,9 @@ module id(
 
     // if the ins is valid
     reg instvalid;
+
+    // Set stall signal
+    assign stallreq = `NopStop;
 
     
     /****   decode   ****/
@@ -452,6 +456,50 @@ module id(
                 default:    begin
                 end
 
+                `EXE_SPECIAL2_INST:    begin
+                    case(op3)
+
+                        `EXE_MADD:   begin  // madd rs, rt
+                            wreg_o      <=      `WriteDisable;
+                            aluop_o     <=      `EXE_MADD_OP;
+                            alusel_o    <=      `EXE_RES_MUL;
+                            reg1_read_o <=      1'b1;
+                            reg2_read_o <=      1'b1;
+                            instvalid   <=      `InstValid;
+                        end
+                        
+                        `EXE_MADDU:   begin // maddu rs, rt
+                            wreg_o      <=      `WriteDisable;
+                            aluop_o     <=      `EXE_MADDU_OP;
+                            alusel_o    <=      `EXE_RES_MUL;
+                            reg1_read_o <=      1'b1;
+                            reg2_read_o <=      1'b1;
+                            instvalid   <=      `InstValid;
+                        end
+
+                        `EXE_MSUB:   begin  // msub rs, rt
+                            wreg_o      <=      `WriteDisable;
+                            aluop_o     <=      `EXE_MSUBU_OP;
+                            alusel_o    <=      `EXE_RES_MUL;
+                            reg1_read_o <=      1'b1;
+                            reg2_read_o <=      1'b1;
+                            instvalid   <=      `InstValid;
+                        end
+
+                        `EXE_MSUBU:   begin
+                            wreg_o      <=      `WriteDisable;
+                            aluop_o     <=      `EXE_MSUBU_OP;
+                            alusel_o    <=      `EXE_RES_MUL;
+                            reg1_read_o <=      1'b1;
+                            reg2_read_o <=      1'b1;
+                            instvalid   <=      `InstValid;
+                        end
+
+                        default:    begin
+                        end
+                    endcase    // EXE_SPECIAL2_INST
+
+                end
             endcase     // case op
 
             if(inst_i[31:21] == 11'b00000000000) begin

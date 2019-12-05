@@ -67,6 +67,11 @@
 `define EXE_REGIMM_INST      6'b000001
 `define EXE_SPECIAL2_INST    6'b011100
 
+`define EXE_MADD             6'b000000
+`define EXE_MADDU            6'b000001
+`define EXE_MSUB             6'b000100
+`define EXEMSUBU             6'b000101
+
 // AluOp
 `define EXE_OR_OP       8'b00100101
 `define EXE_AND_OP      8'b00100100
@@ -98,6 +103,43 @@
 `define EXE_MULT_OP     8'b00011000
 `define EXE_MULTU_OP    8'b00011001
 `define EXE_MUL_OP      8'b10101001
+`define EXE_MADD_OP     8'b10100110
+`define EXE_MADDU_OP    8'b10101000
+`define EXE_MSUB_OP     8'b10101010
+`define EXE_MSUBU_OP    8'b10101011
+
+`define EXE_DIV_OP      8'b00011010
+`define EXE_DIVU_OP     8'b00011011
+
+`define EXE_J_OP        8'b01001111
+`define EXE_JAL_OP      8'b01010000
+`define EXE_JALR_OP     8'b00001001
+`define EXE_JR_OP       8'b00001000
+`define EXE_BEQ_OP      8'b01010001
+`define EXE_BGEZ_OP     8'b01000001
+`define EXE_BGEZAL_OP   8'b01001011
+`define EXE_BGTZ_OP     8'b01010100
+`define EXE_BLEZ_OP     8'b01010011
+`define EXE_BLTZ_OP     8'b01000000
+`define EXE_BLTZAL_OP   8'b01001010
+`define EXE_BNE_OP      8'b01010010
+
+`define EXE_LB_OP       8'b11100000
+`define EXE_LBU_OP      8'b11100100
+`define EXE_LH_OP       8'b11100001
+`define EXE_LHU_OP      8'b11100101
+`define EXE_LL_OP       8'b11110000
+`define EXE_LW_OP       8'b11100011
+`define EXE_LWL_OP      8'b11100010
+`define EXE_LWR_OP      8'b11100110
+`define EXE_PREF_OP     8'b11110011
+`define EXE_SB_OP       8'b11101000
+`define EXE_SC_OP       8'b11111000
+`define EXE_SH_OP       8'b11101001
+`define EXE_SW_OP       8'b11101011
+`define EXE_SWL_OP      8'b11101010
+`define EXE_SWR_OP      8'b11101110
+
 
 
 `define EXE_NOP_OP      8'b00000000
@@ -127,5 +169,9 @@
 `define RegNum          32      // Numbers of universal registers
 `define RegNumLog2      5       // Width of Address Register
 `define NOPRegAddr      5'b00000
+
+/****   Signal Of Stall ****/
+`define Stop            1'b1
+`define NoStop          1'b0
 
 `endif

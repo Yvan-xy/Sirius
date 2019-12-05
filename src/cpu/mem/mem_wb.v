@@ -14,10 +14,13 @@ module mem_wb (
     input wire[`RegBus]         mem_lo,
     input wire                  mem_whilo,
 
+    // Signal from CTRL
+    input wire[5:0]             stall,
+
     // HILO data send to WriteBack stage
-    output reg[`RegBus]        wb_hi,
-    output reg[`RegBus]        wb_lo,
-    output reg                 wb_whilo,
+    output reg[`RegBus]         wb_hi,
+    output reg[`RegBus]         wb_lo,
+    output reg                  wb_whilo,
 
     // Data send to write back stage
     output reg[`RegAddrBus]     wb_wd,
@@ -33,7 +36,14 @@ module mem_wb (
             wb_hi       <=      `ZeroWord;
             wb_lo       <=      `ZeroWord;
             wb_whilo    <=      `WriteDisable;
-        end else begin
+        end else if(stall[4] == `Stop && stall[5] == `NoStop) begin
+            wb_wd       <=      `NOPRegAddr;
+            wb_wdata    <=      `ZeroWord;
+            wb_wreg     <=      `WriteDisable;
+            wb_hi       <=      `ZeroWord;
+            wb_lo       <=      `ZeroWord;
+            wb_whilo    <=      `WriteDisable;
+        end else if(stall[4] == `NoStop) begin
             wb_wd       <=      mem_wd;
             wb_wdata    <=      mem_wdata;
             wb_wreg     <=      mem_wreg;
