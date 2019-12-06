@@ -1,4 +1,4 @@
-`include "../defines/defines.v"
+`include "defines.v"
 module Sirius(
     input wire              clk,
     input wire              rst,
@@ -12,41 +12,10 @@ module Sirius(
     wire[`InstAddrBus]  id_pc_i;
     wire[`InstBus]      id_inst_i;
         
-    // conenct the port of ID and ID/EX
-    wire[`AluOpBus]     id_aluop_o;
-    wire[`AluSelBus]    id_alusel_o;
-    wire[`RegBus]       id_reg1_o;
-    wire[`RegBus]       id_reg2_o;
-    wire                id_wreg_o;
-    wire[`RegAddrBus]   id_wd_o;
 
-    // connect the port of ID/EX and EX
-    wire[`AluOpBus]     ex_aluop_i;
-    wire[`AluSelBus]    ex_alusel_i;
-    wire[`RegBus]       ex_reg1_i;
-    wire[`RegBus]       ex_reg2_i;
-    wire                ex_wreg_i;
-    wire[`RegAddrBus]   ex_wd_i;
 
-    // connect the port of EX and EX/MEM
-    wire                ex_wreg_o;
-    wire[`RegAddrBus]   ex_wd_o;
-    wire[`RegBus]       ex_wdata_o;
 
-    // connect the port of EX/MEM and MEMORY
-    wire                mem_wreg_i;
-    wire[`RegAddrBus]   mem_wd_i;
-    wire[`RegBus]       mem_wdata_i;
 
-    // connect the port of MEMORY and MEM/WB
-    wire                mem_wreg_o;
-    wire[`RegAddrBus]   mem_wd_o;
-    wire[`RegBus]       mem_wdata_o;
-
-    // connect the port of MEM/WB and Write Back stage
-    wire                wb_wreg_i;
-    wire[`RegAddrBus]   wb_wd_i;
-    wire[`RegBus]       wb_wdata_i;
 
     // connect the port of ID and Regfile
     wire                reg1_read;
@@ -57,28 +26,15 @@ module Sirius(
     wire[`RegAddrBus]   reg2_addr;
 
     // HILO data from MEMORY stage
-    wire[`RegBus]       mem_hi_o;
-    wire[`RegBus]       mem_lo_o;
-    wire                mem_whilo_o;
+    // wire[`RegBus]       mem_hi_o;
+    // wire[`RegBus]       mem_lo_o;
+    // wire                mem_whilo_o;
 
-    // HILO to Ex stage
-    wire[`RegBus]       hi_o;
-    wire[`RegBus]       lo_o;
 
-    // HILO result data from EX stage to MEMORY stage
-    wire[`RegBus]       ex_hi_i;
-    wire[`RegBus]       ex_lo_i;
-    wire                ex_whilo_i;
 
-    // HILO result data from EX/MEM stage to MEM
-    wire[`RegBus]       ex_hi_o;
-    wire[`RegBus]       ex_lo_o;
-    wire                ex_whilo_o;
 
-    // HILO data from MEM to MEM/WB
-    wire[`RegBus]       wb_hi_i;
-    wire[`RegBus]       wb_lo_i;
-    wire                wb_whilo_i;
+
+
 
     // Signal from CTRL
     wire[5:0]           stall;
@@ -92,7 +48,24 @@ module Sirius(
 
         /***** OUTPUT *****/
         .stall(stall)
-    )
+    );
+
+    // Instantiate the Regfile
+    regfile regfile0(
+        .clk(clk),
+        .rst(rst),
+
+        .we(wb_wreg_i),
+        .waddr(wb_wd_i),
+        .wdata(wb_wdata_i),
+        .re1(reg1_read),
+        .raddr1(reg1_addr),
+        .rdata1(reg1_data),
+        .re2(reg2_read),
+        .raddr2(reg2_addr),
+        .rdata2(reg2_data)
+    );
+
 
     // Instantiate the pc_reg
     pc_reg pc_reg0(
@@ -157,21 +130,13 @@ module Sirius(
         .stallreq(stallreq_from_id)
     );
 
-    // Instantiate the Regfile
-    regfile regfile0(
-        .clk(clk),
-        .rst(rst),
-
-        .we(wb_wreg_i),
-        .waddr(wb_wd_i),
-        .wdata(wb_wdata_i),
-        .re1(reg1_read),
-        .raddr1(reg1_addr),
-        .rdata1(reg1_data),
-        .re2(reg2_read),
-        .raddr2(reg2_addr),
-        .rdata2(reg2_data)
-    );
+    // conenct the port of ID and ID/EX
+    wire[`AluOpBus]     id_aluop_o;
+    wire[`AluSelBus]    id_alusel_o;
+    wire[`RegBus]       id_reg1_o;
+    wire[`RegBus]       id_reg2_o;
+    wire                id_wreg_o;
+    wire[`RegAddrBus]   id_wd_o;
 
     // Instantiate ID/EX
     id_ex id_ex0(
@@ -198,12 +163,17 @@ module Sirius(
         .ex_wreg(ex_wreg_i)
     );
 
+    // connect the port of ID/EX and EX
+    wire[`AluOpBus]     ex_aluop_i;
+    wire[`AluSelBus]    ex_alusel_i;
+    wire[`RegBus]       ex_reg1_i;
+    wire[`RegBus]       ex_reg2_i;
+    wire                ex_wreg_i;
+    wire[`RegAddrBus]   ex_wd_i;
+
     wire                stallreq_from_ex;
     wire[`DoubleRegBus] hilo_temp_to_ex;
     wire[1:0]           cnt_to_ex;
-
-    wire[`DoubleRegBus] hilo_temp_to_ex_mem;
-    wire[1:0]           cnt_to_ex_mem;
 
     // Instantiate EX
     ex ex0(
@@ -223,14 +193,14 @@ module Sirius(
         .lo_i(lo_o),
 
         // HILO data from WriteBack stage
-        .wb_hi_i(wb_hi_i),
-        .wb_lo_i(wb_lo_i),
-        .wb_whilo_i(wb_whilo_i),
+        .wb_hi_i(wb_hi_o),
+        .wb_lo_i(wb_lo_o),
+        .wb_whilo_i(wb_whilo_o),
 
         // HILO data from MEMORY stage
-        .mem_hi_i(mem_hi_o),
-        .mem_lo_i(mem_lo_o),
-        .mem_whilo_i(mem_whilo_o),
+        .mem_hi_i(wb_hi_i),
+        .mem_lo_i(wb_lo_i),
+        .mem_whilo_i(wb_whilo_i),
         
         // HILO data from EX_MEM
         .hilo_temp_i(hilo_temp_to_ex),
@@ -246,15 +216,29 @@ module Sirius(
         .stallreq(stallreq_from_ex),
 
         // Result data of HILO 
-        .hi_o(ex_hi_o),
-        .lo_o(ex_lo_o),
-        .whilo_o(ex_whilo_o),
+        .hi_o(ex_hi_i),
+        .lo_o(ex_lo_i),
+        .whilo_o(ex_whilo_i),
 
         // Output data to EX/MEM
         .wd_o(ex_wd_o),
         .wreg_o(ex_wreg_o),
         .wdata_o(ex_wdata_o)
     );
+
+    // connect the port of EX and EX/MEM
+    wire[`RegAddrBus]   ex_wd_o;
+    wire                ex_wreg_o;
+    wire[`RegBus]       ex_wdata_o;
+
+    // HILO data from EX
+    wire[`DoubleRegBus] hilo_temp_to_ex_mem;
+    wire[1:0]           cnt_to_ex_mem;
+
+    // HILO result data from EX stage to MEMORY stage
+    wire[`RegBus]       ex_hi_i;
+    wire[`RegBus]       ex_lo_i;
+    wire                ex_whilo_i;
 
     // Instantiate EX/MEM
     ex_mem ex_mem0(
@@ -272,10 +256,6 @@ module Sirius(
         .ex_lo(ex_lo_i),
         .ex_whilo(ex_whilo_i),
 
-        // HILO data send to MEMORY stage
-        .mem_hi(ex_hi_o),
-        .mem_lo(ex_hi_o),
-        .mem_whilo(ex_whilo_o),
 
         // Signal from CTRL
         .stall(stall),
@@ -290,14 +270,30 @@ module Sirius(
         .hilo_o(hilo_temp_to_ex),
         .cnt_o(cnt_to_ex),
 
+        // HILO data send to MEMORY stage
+        .mem_hi(ex_hi_o),
+        .mem_lo(ex_lo_o),
+        .mem_whilo(ex_whilo_o),
+
         // Output data to MEM
         .mem_wd(mem_wd_i),
         .mem_wreg(mem_wreg_i),
         .mem_wdata(mem_wdata_i)
     );
 
+    // connect the port of EX/MEM and MEMORY
+    wire[`RegAddrBus]   mem_wd_i;
+    wire                mem_wreg_i;
+    wire[`RegBus]       mem_wdata_i;
+ 
+    // HILO result data from EX/MEM stage to MEM
+    wire[`RegBus]       ex_hi_o;
+    wire[`RegBus]       ex_lo_o;
+    wire                ex_whilo_o;
+
     // Instantiate MEMORY
     mem mem0(
+        /***** INPUT *****/
         .rst(rst),
 
         // Input data from EX/MEM
@@ -310,6 +306,8 @@ module Sirius(
         .lo_i(ex_lo_o),
         .whilo_i(ex_whilo_o),
 
+        /***** OUTPUT *****/
+
         // HILO data to MEM/WB
         .hi_o(wb_hi_i),
         .lo_o(wb_lo_i),
@@ -321,8 +319,25 @@ module Sirius(
         .wdata_o(mem_wdata_o)
     );
 
+    // connect the port of MEMORY and MEM/WB
+    wire[`RegAddrBus]   mem_wd_o;
+    wire                mem_wreg_o;
+    wire[`RegBus]       mem_wdata_o;
+
+
+    // HILO data from MEM to MEM/WB
+    wire[`RegBus]       wb_hi_i;
+    wire[`RegBus]       wb_lo_i;
+    wire                wb_whilo_i;
+
+    // connect the port of MEM/WB and Write Back stage
+    wire[`RegAddrBus]   wb_wd_i;
+    wire                wb_wreg_i;
+    wire[`RegBus]       wb_wdata_i;
+
     // Instantiate MEM/WB
     mem_wb mem_wb0(
+        /***** INPUT *****/
         .clk(clk),
         .rst(rst),
 
@@ -331,8 +346,19 @@ module Sirius(
         .mem_wreg(mem_wreg_o),
         .mem_wdata(mem_wdata_o),
 
+        // HILO data from MEM stage
+        .mem_hi(wb_hi_i),
+        .mem_lo(wb_lo_i),
+        .mem_whilo(wb_whilo_i),
+
         // Signal from CTRL
         .stall(stall),
+
+        /***** OUTPUT *****/
+        // HILO data to hilo or EX
+        .wb_hi(wb_hi_o),
+        .wb_lo(wb_lo_o),
+        .wb_whilo(wb_whilo_o),
 
         // Output data to Write Back
         .wb_wd(wb_wd_i),
@@ -340,14 +366,23 @@ module Sirius(
         .wb_wdata(wb_wdata_i)
     );
 
+    wire[`RegBus]       wb_hi_o;
+    wire[`RegBus]       wb_lo_o;
+    wire                wb_whilo_o;
+
+
+    // HILO to Ex stage
+    wire[`RegBus]       hi_o;
+    wire[`RegBus]       lo_o;
+
     hilo_reg hilo_reg0(
         .clk(clk),
         .rst(rst),
 
         // Data from WB/MEM register
-        .we(wb_whilo_i),
-        .hi_i(wb_hi_i),
-        .lo_i(wb_lo_i),
+        .we(wb_whilo_o),
+        .hi_i(wb_hi_o),
+        .lo_i(wb_lo_o),
 
         // Data to EX stage
         .hi_o(hi_o),

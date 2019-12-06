@@ -1,7 +1,8 @@
 # compile verilog/system verilog design source files
-verilog xil_defaultlib  \
+verilog xil_defaultlib "/home/code/verilog/Sirius/src/defines/defines.v" --include "../../../../../src/defines" \
 "../../../../../src/cpu/Sirius.v" \
 "../../../../../src/cpu_top.v" \
+"../../../../../src/cpu/CTRL/ctrl.v" \
 "../../../../../src/cpu/ex/ex.v" \
 "../../../../../src/cpu/ex/ex_mem.v" \
 "../../../../../src/register/hilo_reg.v" \

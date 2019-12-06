@@ -1,4 +1,4 @@
-#include "../../defines/defines.v"
+`include "defines.v"
 
 module ctrl(
     input wire      rst,
@@ -18,3 +18,4 @@ module ctrl(
             stall <= 6'b000000;    
         end
     end
+endmodule

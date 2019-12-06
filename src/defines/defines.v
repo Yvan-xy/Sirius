@@ -70,7 +70,7 @@
 `define EXE_MADD             6'b000000
 `define EXE_MADDU            6'b000001
 `define EXE_MSUB             6'b000100
-`define EXEMSUBU             6'b000101
+`define EXE_MSUBU             6'b000101
 
 // AluOp
 `define EXE_OR_OP       8'b00100101

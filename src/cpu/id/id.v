@@ -1,4 +1,4 @@
-`include "../../defines/defines.v"
+`include "defines.v"
 
 module id(
     input   wire                    rst,
@@ -31,7 +31,7 @@ module id(
     output  reg [`RegAddrBus]       wd_o,            // The address of destination in Regfile in decode stage
     output  reg                     wreg_o,          // If exist destination to write back
 
-    output reg                      stallreq         // Stall request
+    output  wire                    stallreq         // Stall request
 );
 
     // fetch opcode and ifun
@@ -47,7 +47,7 @@ module id(
     reg instvalid;
 
     // Set stall signal
-    assign stallreq = `NopStop;
+    assign stallreq = `NoStop;
 
     
     /****   decode   ****/
@@ -445,19 +445,6 @@ module id(
                             instvalid   <=      `InstValid;
                         end
 
-                        default:    begin
-                            
-                        end
-                    
-                    endcase     // op3
-                
-                end     // EXE_SPECIAL2_INST
-
-                default:    begin
-                end
-
-                `EXE_SPECIAL2_INST:    begin
-                    case(op3)
 
                         `EXE_MADD:   begin  // madd rs, rt
                             wreg_o      <=      `WriteDisable;
@@ -479,7 +466,7 @@ module id(
 
                         `EXE_MSUB:   begin  // msub rs, rt
                             wreg_o      <=      `WriteDisable;
-                            aluop_o     <=      `EXE_MSUBU_OP;
+                            aluop_o     <=      `EXE_MSUB_OP;
                             alusel_o    <=      `EXE_RES_MUL;
                             reg1_read_o <=      1'b1;
                             reg2_read_o <=      1'b1;
@@ -496,10 +483,16 @@ module id(
                         end
 
                         default:    begin
+                            
                         end
-                    endcase    // EXE_SPECIAL2_INST
+                    
+                    endcase     // op3
+                
+                end     // EXE_SPECIAL2_INST
 
+                default:    begin
                 end
+
             endcase     // case op
 
             if(inst_i[31:21] == 11'b00000000000) begin

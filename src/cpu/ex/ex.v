@@ -1,4 +1,4 @@
-`include "../../defines/defines.v"
+`include "defines.v"
 module ex(
     input wire                  rst,
 
@@ -71,7 +71,7 @@ module ex(
     wire[`RegBus]           opdata1_mult;       // Multipilicand in "Multiply" operation
     wire[`RegBus]           opdata2_mult;       // Multipilier in "Multiply" operation
     wire[`RegBus]           hilo_temp;          // Save temp result
-    reg [`RegBus]           hilo_temp1;         // Save temp result of the second cycle
+    reg [`DoubleRegBus]     hilo_temp1;         // Save temp result of the second cycle
     reg [`DoubleRegBus]     mulres;             // Result of "Multiply" operation 
     reg                     stallreq_for_madd_msub;
 
@@ -388,6 +388,7 @@ module ex(
                 end
 
             endcase
+        end
     end
 
     /****    According to 'alusel_i', select the result    ****/
