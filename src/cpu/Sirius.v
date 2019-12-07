@@ -12,11 +12,6 @@ module Sirius(
     wire[`InstAddrBus]  id_pc_i;
     wire[`InstBus]      id_inst_i;
         
-
-
-
-
-
     // connect the port of ID and Regfile
     wire                reg1_read;
     wire                reg2_read;
@@ -25,19 +20,36 @@ module Sirius(
     wire[`RegAddrBus]   reg1_addr;
     wire[`RegAddrBus]   reg2_addr;
 
-    // HILO data from MEMORY stage
-    // wire[`RegBus]       mem_hi_o;
-    // wire[`RegBus]       mem_lo_o;
-    // wire                mem_whilo_o;
-
-
-
-
-
-
 
     // Signal from CTRL
     wire[5:0]           stall;
+
+    // Signal from EX for division
+    wire                signed_div;
+    wire[31:0]          div_opdata_1;
+    wire[31:0]          div_opdata_2;
+    wire                div_start;
+    // wire                 annul_i;    // not now
+
+
+    // Instantiate Divider
+    div div0(
+        /***** Input *****/
+        .rst(rst),
+        .clk(clk),
+
+        // Signal from EX stage
+        .signed_div_i(signed_div),
+        .opdata1_i(div_opdata_1),
+        .opdata2_i(div_opdata_2),
+        .start_i(div_start),
+        .annul_i(1'b0),
+
+        /***** OUTPUT *****/
+        .result_o(div_result),
+        .ready_o(div_ready)
+    );
+
 
     // Instantiate CTRL
     ctrl ctrl0(
@@ -175,6 +187,10 @@ module Sirius(
     wire[`DoubleRegBus] hilo_temp_to_ex;
     wire[1:0]           cnt_to_ex;
 
+    // Data from Divider to EX
+    wire[63:0]          div_result;
+    wire                div_ready;
+
     // Instantiate EX
     ex ex0(
         /***** INPUT *****/
@@ -206,7 +222,16 @@ module Sirius(
         .hilo_temp_i(hilo_temp_to_ex),
         .cnt_i(cnt_to_ex),
 
+        // Data from Divider
+        .div_result_i(div_result),
+        .div_ready_i(div_ready),
+
         /***** OUTPUT *****/
+        // Data send to Dividor
+        .div_opdata1_o(div_opdata_1),
+        .div_opdata2_o(div_opdata_2),
+        .div_start_o(div_start),
+        .signed_div_o(signed_div),
 
         // HILO data to EX_MEM
         .hilo_temp_o(hilo_temp_to_ex_mem),

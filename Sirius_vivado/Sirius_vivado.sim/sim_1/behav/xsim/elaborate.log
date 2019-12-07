@@ -5,37 +5,4 @@ Using 8 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
 Completed static elaboration
-Starting simulation data flow analysis
-WARNING: [XSIM 43-4099] "/home/code/verilog/Sirius/src/cpu_top.v" Line 2. Module cpu_top doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/home/code/verilog/Sirius/src/cpu/Sirius.v" Line 2. Module Sirius doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/home/code/verilog/Sirius/src/cpu/CTRL/ctrl.v" Line 3. Module ctrl doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/home/code/verilog/Sirius/src/register/regfile.v" Line 2. Module regfile doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/home/code/verilog/Sirius/src/cpu/if/pc_reg.v" Line 3. Module pc_reg doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/home/code/verilog/Sirius/src/cpu/if/if_id.v" Line 3. Module if_id doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/home/code/verilog/Sirius/src/cpu/id/id.v" Line 3. Module id doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/home/code/verilog/Sirius/src/cpu/id/id_ex.v" Line 3. Module id_ex doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/home/code/verilog/Sirius/src/cpu/ex/ex.v" Line 2. Module ex doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/home/code/verilog/Sirius/src/cpu/ex/ex_mem.v" Line 3. Module ex_mem doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/home/code/verilog/Sirius/src/cpu/mem/mem.v" Line 3. Module mem doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/home/code/verilog/Sirius/src/cpu/mem/mem_wb.v" Line 3. Module mem_wb doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/home/code/verilog/Sirius/src/register/hilo_reg.v" Line 3. Module hilo_reg doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/home/code/verilog/Sirius/src/inst_rom.v" Line 1. Module inst_rom doesn't have a timescale but at least one module in design has a timescale.
-Completed simulation data flow analysis
-Time Resolution for simulation is 1ps
-Compiling module xil_defaultlib.ctrl
-Compiling module xil_defaultlib.regfile
-Compiling module xil_defaultlib.pc_reg
-Compiling module xil_defaultlib.if_id
-Compiling module xil_defaultlib.id
-Compiling module xil_defaultlib.id_ex
-Compiling module xil_defaultlib.ex
-Compiling module xil_defaultlib.ex_mem
-Compiling module xil_defaultlib.mem
-Compiling module xil_defaultlib.mem_wb
-Compiling module xil_defaultlib.hilo_reg
-Compiling module xil_defaultlib.Sirius
-Compiling module xil_defaultlib.inst_rom
-Compiling module xil_defaultlib.cpu_top
-Compiling module xil_defaultlib.Sirius_tb
-Compiling module xil_defaultlib.glbl
-Built simulation snapshot Sirius_tb_behav
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel

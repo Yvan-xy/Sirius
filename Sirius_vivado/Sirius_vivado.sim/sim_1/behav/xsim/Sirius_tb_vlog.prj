@@ -3,6 +3,7 @@ verilog xil_defaultlib "/home/code/verilog/Sirius/src/defines/defines.v" --inclu
 "../../../../../src/cpu/Sirius.v" \
 "../../../../../src/cpu_top.v" \
 "../../../../../src/cpu/CTRL/ctrl.v" \
+"../../../../../src/cpu/ex/div.v" \
 "../../../../../src/cpu/ex/ex.v" \
 "../../../../../src/cpu/ex/ex_mem.v" \
 "../../../../../src/register/hilo_reg.v" \

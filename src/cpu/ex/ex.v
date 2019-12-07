@@ -28,6 +28,16 @@ module ex(
     input wire[`DoubleRegBus]   hilo_temp_i,
     input wire[1:0]             cnt_i,
 
+    // Data from Divider
+    input wire[`DoubleRegBus]   div_result_i,   // div's result
+    input wire                  div_ready_i,    // is div over or not
+
+    // Data send to Divider
+    output reg[`RegBus]         div_opdata1_o,
+    output reg[`RegBus]         div_opdata2_o,
+    output reg                  div_start_o,
+    output reg                  signed_div_o,
+
     // Data to ex_mem of mult-arithmetic
     output reg[`DoubleRegBus]   hilo_temp_o,
     output reg[1:0]             cnt_o,
@@ -74,9 +84,10 @@ module ex(
     reg [`DoubleRegBus]     hilo_temp1;         // Save temp result of the second cycle
     reg [`DoubleRegBus]     mulres;             // Result of "Multiply" operation 
     reg                     stallreq_for_madd_msub;
+    reg                     stallreq_for_div;
 
     always @ (*) begin
-        stallreq <= stallreq_for_madd_msub;    
+        stallreq <= stallreq_for_madd_msub || stallreq_for_div;
     end
 
     /****    Fetch the lastest value of HILO   ****/
@@ -391,6 +402,71 @@ module ex(
         end
     end
 
+    always @ (*) begin
+        if(rst == `RstEnable) begin
+            stallreq_for_div <=     `NoStop;
+            div_opdata1_o    <=     `ZeroWord;
+            div_opdata2_o    <=     `ZeroWord;
+            div_start_o      <=     `DivStop;
+            signed_div_o     <=     1'b0;
+        end else begin
+            stallreq_for_div <=     `NoStop;
+            div_opdata1_o    <=     `ZeroWord;
+            div_opdata2_o    <=     `ZeroWord;
+            div_start_o      <=     `DivStop;
+            signed_div_o     <=     1'b0;
+            
+            case (aluop_i)
+                `EXE_DIV_OP: begin
+                    if(div_ready_i == `DivResultNotReady) begin
+                        div_opdata1_o    <=     reg1_i;
+                        div_opdata2_o    <=     reg2_i;
+                        div_start_o      <=     `DivStart;
+                        signed_div_o     <=     1'b1;
+                        stallreq_for_div <=     `Stop;
+                    end else if(div_ready_i == `DivResultReady) begin
+                        div_opdata1_o    <=     reg1_i;
+                        div_opdata2_o    <=     reg2_i;
+                        div_start_o      <=     `DivStop;   // Ending the divider
+                        signed_div_o     <=     1'b1;
+                        stallreq_for_div <=     `NoStop;    // Do not request for stalling
+                    end else begin
+                        div_opdata1_o    <=     `ZeroWord;    
+                        div_opdata2_o    <=     `ZeroWord;    
+                        div_start_o      <=     `DivStop;
+                        signed_div_o     <=     1'b0;
+                        stallreq_for_div <=     `NoStop;
+                    end 
+                end
+
+                `EXE_DIVU_OP: begin
+                    if(div_ready_i == `DivResultNotReady) begin
+                        div_opdata1_o    <=     reg1_i;
+                        div_opdata2_o    <=     reg2_i;
+                        div_start_o      <=     `DivStart;
+                        signed_div_o     <=     1'b0;
+                        stallreq_for_div <=     `Stop;
+                    end else if(div_ready_i == `DivResultReady) begin
+                        div_opdata1_o    <=     reg1_i;
+                        div_opdata2_o    <=     reg2_i;
+                        div_start_o      <=     `DivStop;   // Ending the divider
+                        signed_div_o     <=     1'b0;
+                        stallreq_for_div <=     `NoStop;    // Do not request for stalling
+                    end else begin
+                        div_opdata1_o    <=     `ZeroWord;    
+                        div_opdata2_o    <=     `ZeroWord;    
+                        div_start_o      <=     `DivStop;
+                        signed_div_o     <=     1'b0;
+                        stallreq_for_div <=     `NoStop;
+                    end 
+                end
+
+                default: begin
+                end
+            endcase // aluop_i 
+        end
+    end
+
     /****    According to 'alusel_i', select the result    ****/
     always @ (*) begin
         wd_o <= wd_i;
@@ -450,6 +526,11 @@ module ex(
             whilo_o <=  `WriteEnable;
             hi_o    <=  HI;
             lo_o    <=  reg1_i;
+        end else if ((aluop_i == `EXE_DIV_OP)  ||
+                     (aluop_i == `EXE_DIVU_OP)) begin
+            whilo_o <=  `WriteEnable;
+            hi_o    <=  div_result_i[63:32];
+            lo_o    <=  div_result_i[31:0]; 
         end else begin
             whilo_o <=  `WriteDisable;
             hi_o    <=  `ZeroWord;
