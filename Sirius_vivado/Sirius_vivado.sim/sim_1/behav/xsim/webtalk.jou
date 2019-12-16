@@ -2,8 +2,8 @@
 # Webtalk v2019.2 (64-bit)
 # SW Build 2708876 on Wed Nov  6 21:39:14 MST 2019
 # IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
-# Start of session at: Fri Dec  6 20:09:38 2019
-# Process ID: 10028
+# Start of session at: Sat Dec  7 23:15:43 2019
+# Process ID: 154222
 # Current directory: /home/code/verilog/Sirius/Sirius_vivado/Sirius_vivado.sim/sim_1/behav/xsim
 # Command line: wbtcv -mode batch -source /home/code/verilog/Sirius/Sirius_vivado/Sirius_vivado.sim/sim_1/behav/xsim/xsim.dir/Sirius_tb_behav/webtalk/xsim_webtalk.tcl -notrace
 # Log file: /home/code/verilog/Sirius/Sirius_vivado/Sirius_vivado.sim/sim_1/behav/xsim/webtalk.log
