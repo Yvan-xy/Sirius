@@ -42,7 +42,7 @@ module id(
     output  wire                    stallreq         // Stall request
 );
 
-    wire rd        = inst_i[15:11];
+    wire [4:0] rd        = inst_i[15:11];
 
     
     // fetch opcode and ifun

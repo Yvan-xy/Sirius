@@ -1,0 +1,130 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/defines/defines.v" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/cpu/Sirius.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Sirius
+INFO: [VRFC 10-2458] undeclared symbol div_result, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:55]
+INFO: [VRFC 10-2458] undeclared symbol div_ready, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:56]
+INFO: [VRFC 10-2458] undeclared symbol stallreq_from_id, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:64]
+INFO: [VRFC 10-2458] undeclared symbol stallreq_from_ex, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:65]
+INFO: [VRFC 10-2458] undeclared symbol wb_wreg_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:76]
+INFO: [VRFC 10-2458] undeclared symbol wb_wd_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:77]
+INFO: [VRFC 10-2458] undeclared symbol wb_wdata_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:78]
+WARNING: [VRFC 10-2938] 'stallreq_from_id' is already implicitly declared on line 64 [/home/code/verilog/Sirius/src/cpu/Sirius.v:111]
+INFO: [VRFC 10-2458] undeclared symbol ex_wreg_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:125]
+INFO: [VRFC 10-2458] undeclared symbol ex_wdata_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:126]
+INFO: [VRFC 10-2458] undeclared symbol ex_wd_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:127]
+INFO: [VRFC 10-2458] undeclared symbol mem_wreg_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:130]
+INFO: [VRFC 10-2458] undeclared symbol mem_wdata_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:131]
+INFO: [VRFC 10-2458] undeclared symbol mem_wd_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:132]
+INFO: [VRFC 10-2458] undeclared symbol id_aluop_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:146]
+INFO: [VRFC 10-2458] undeclared symbol id_alusel_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:147]
+INFO: [VRFC 10-2458] undeclared symbol id_reg1_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:148]
+INFO: [VRFC 10-2458] undeclared symbol id_reg2_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:149]
+INFO: [VRFC 10-2458] undeclared symbol id_wd_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:150]
+INFO: [VRFC 10-2458] undeclared symbol id_wreg_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:151]
+INFO: [VRFC 10-2458] undeclared symbol id_link_address_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:156]
+INFO: [VRFC 10-2458] undeclared symbol id_is_in_delayslot_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:157]
+WARNING: [VRFC 10-2938] 'id_aluop_o' is already implicitly declared on line 146 [/home/code/verilog/Sirius/src/cpu/Sirius.v:163]
+WARNING: [VRFC 10-2938] 'id_alusel_o' is already implicitly declared on line 147 [/home/code/verilog/Sirius/src/cpu/Sirius.v:164]
+WARNING: [VRFC 10-2938] 'id_reg1_o' is already implicitly declared on line 148 [/home/code/verilog/Sirius/src/cpu/Sirius.v:165]
+WARNING: [VRFC 10-2938] 'id_reg2_o' is already implicitly declared on line 149 [/home/code/verilog/Sirius/src/cpu/Sirius.v:166]
+WARNING: [VRFC 10-2938] 'id_wreg_o' is already implicitly declared on line 151 [/home/code/verilog/Sirius/src/cpu/Sirius.v:167]
+WARNING: [VRFC 10-2938] 'id_wd_o' is already implicitly declared on line 150 [/home/code/verilog/Sirius/src/cpu/Sirius.v:168]
+WARNING: [VRFC 10-2938] 'id_is_in_delayslot_o' is already implicitly declared on line 157 [/home/code/verilog/Sirius/src/cpu/Sirius.v:169]
+WARNING: [VRFC 10-2938] 'id_link_address_o' is already implicitly declared on line 156 [/home/code/verilog/Sirius/src/cpu/Sirius.v:170]
+INFO: [VRFC 10-2458] undeclared symbol ex_aluop_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:193]
+INFO: [VRFC 10-2458] undeclared symbol ex_alusel_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:194]
+INFO: [VRFC 10-2458] undeclared symbol ex_reg1_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:195]
+INFO: [VRFC 10-2458] undeclared symbol ex_reg2_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:196]
+INFO: [VRFC 10-2458] undeclared symbol ex_wd_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:197]
+INFO: [VRFC 10-2458] undeclared symbol ex_wreg_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:198]
+INFO: [VRFC 10-2458] undeclared symbol ex_link_address_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:199]
+INFO: [VRFC 10-2458] undeclared symbol ex_is_in_delayslot_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:200]
+WARNING: [VRFC 10-2938] 'ex_aluop_i' is already implicitly declared on line 193 [/home/code/verilog/Sirius/src/cpu/Sirius.v:205]
+WARNING: [VRFC 10-2938] 'ex_alusel_i' is already implicitly declared on line 194 [/home/code/verilog/Sirius/src/cpu/Sirius.v:206]
+WARNING: [VRFC 10-2938] 'ex_reg1_i' is already implicitly declared on line 195 [/home/code/verilog/Sirius/src/cpu/Sirius.v:207]
+WARNING: [VRFC 10-2938] 'ex_reg2_i' is already implicitly declared on line 196 [/home/code/verilog/Sirius/src/cpu/Sirius.v:208]
+WARNING: [VRFC 10-2938] 'ex_wreg_i' is already implicitly declared on line 198 [/home/code/verilog/Sirius/src/cpu/Sirius.v:209]
+WARNING: [VRFC 10-2938] 'ex_wd_i' is already implicitly declared on line 197 [/home/code/verilog/Sirius/src/cpu/Sirius.v:210]
+WARNING: [VRFC 10-2938] 'ex_is_in_delayslot_i' is already implicitly declared on line 200 [/home/code/verilog/Sirius/src/cpu/Sirius.v:212]
+WARNING: [VRFC 10-2938] 'ex_link_address_i' is already implicitly declared on line 199 [/home/code/verilog/Sirius/src/cpu/Sirius.v:213]
+WARNING: [VRFC 10-2938] 'stallreq_from_ex' is already implicitly declared on line 65 [/home/code/verilog/Sirius/src/cpu/Sirius.v:216]
+WARNING: [VRFC 10-2938] 'div_result' is already implicitly declared on line 55 [/home/code/verilog/Sirius/src/cpu/Sirius.v:221]
+WARNING: [VRFC 10-2938] 'div_ready' is already implicitly declared on line 56 [/home/code/verilog/Sirius/src/cpu/Sirius.v:222]
+INFO: [VRFC 10-2458] undeclared symbol hi_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:238]
+INFO: [VRFC 10-2458] undeclared symbol lo_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:239]
+INFO: [VRFC 10-2458] undeclared symbol wb_hi_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:242]
+INFO: [VRFC 10-2458] undeclared symbol wb_lo_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:243]
+INFO: [VRFC 10-2458] undeclared symbol wb_whilo_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:244]
+INFO: [VRFC 10-2458] undeclared symbol wb_hi_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:247]
+INFO: [VRFC 10-2458] undeclared symbol wb_lo_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:248]
+INFO: [VRFC 10-2458] undeclared symbol wb_whilo_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:249]
+INFO: [VRFC 10-2458] undeclared symbol hilo_temp_to_ex_mem, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:271]
+INFO: [VRFC 10-2458] undeclared symbol cnt_to_ex_mem, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:272]
+INFO: [VRFC 10-2458] undeclared symbol ex_hi_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:278]
+INFO: [VRFC 10-2458] undeclared symbol ex_lo_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:279]
+INFO: [VRFC 10-2458] undeclared symbol ex_whilo_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:280]
+WARNING: [VRFC 10-2938] 'ex_wd_o' is already implicitly declared on line 127 [/home/code/verilog/Sirius/src/cpu/Sirius.v:289]
+WARNING: [VRFC 10-2938] 'ex_wreg_o' is already implicitly declared on line 125 [/home/code/verilog/Sirius/src/cpu/Sirius.v:290]
+WARNING: [VRFC 10-2938] 'ex_wdata_o' is already implicitly declared on line 126 [/home/code/verilog/Sirius/src/cpu/Sirius.v:291]
+WARNING: [VRFC 10-2938] 'hilo_temp_to_ex_mem' is already implicitly declared on line 271 [/home/code/verilog/Sirius/src/cpu/Sirius.v:294]
+WARNING: [VRFC 10-2938] 'cnt_to_ex_mem' is already implicitly declared on line 272 [/home/code/verilog/Sirius/src/cpu/Sirius.v:295]
+WARNING: [VRFC 10-2938] 'ex_hi_i' is already implicitly declared on line 278 [/home/code/verilog/Sirius/src/cpu/Sirius.v:298]
+WARNING: [VRFC 10-2938] 'ex_lo_i' is already implicitly declared on line 279 [/home/code/verilog/Sirius/src/cpu/Sirius.v:299]
+WARNING: [VRFC 10-2938] 'ex_whilo_i' is already implicitly declared on line 280 [/home/code/verilog/Sirius/src/cpu/Sirius.v:300]
+INFO: [VRFC 10-2458] undeclared symbol ex_hi_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:333]
+INFO: [VRFC 10-2458] undeclared symbol ex_lo_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:334]
+INFO: [VRFC 10-2458] undeclared symbol ex_whilo_o, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:335]
+INFO: [VRFC 10-2458] undeclared symbol mem_wd_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:338]
+INFO: [VRFC 10-2458] undeclared symbol mem_wreg_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:339]
+INFO: [VRFC 10-2458] undeclared symbol mem_wdata_i, assumed default net type wire [/home/code/verilog/Sirius/src/cpu/Sirius.v:340]
+WARNING: [VRFC 10-2938] 'mem_wd_i' is already implicitly declared on line 338 [/home/code/verilog/Sirius/src/cpu/Sirius.v:344]
+WARNING: [VRFC 10-2938] 'mem_wreg_i' is already implicitly declared on line 339 [/home/code/verilog/Sirius/src/cpu/Sirius.v:345]
+WARNING: [VRFC 10-2938] 'mem_wdata_i' is already implicitly declared on line 340 [/home/code/verilog/Sirius/src/cpu/Sirius.v:346]
+WARNING: [VRFC 10-2938] 'ex_hi_o' is already implicitly declared on line 333 [/home/code/verilog/Sirius/src/cpu/Sirius.v:349]
+WARNING: [VRFC 10-2938] 'ex_lo_o' is already implicitly declared on line 334 [/home/code/verilog/Sirius/src/cpu/Sirius.v:350]
+WARNING: [VRFC 10-2938] 'ex_whilo_o' is already implicitly declared on line 335 [/home/code/verilog/Sirius/src/cpu/Sirius.v:351]
+WARNING: [VRFC 10-2938] 'mem_wd_o' is already implicitly declared on line 132 [/home/code/verilog/Sirius/src/cpu/Sirius.v:382]
+WARNING: [VRFC 10-2938] 'mem_wreg_o' is already implicitly declared on line 130 [/home/code/verilog/Sirius/src/cpu/Sirius.v:383]
+WARNING: [VRFC 10-2938] 'mem_wdata_o' is already implicitly declared on line 131 [/home/code/verilog/Sirius/src/cpu/Sirius.v:384]
+WARNING: [VRFC 10-2938] 'wb_hi_i' is already implicitly declared on line 247 [/home/code/verilog/Sirius/src/cpu/Sirius.v:388]
+WARNING: [VRFC 10-2938] 'wb_lo_i' is already implicitly declared on line 248 [/home/code/verilog/Sirius/src/cpu/Sirius.v:389]
+WARNING: [VRFC 10-2938] 'wb_whilo_i' is already implicitly declared on line 249 [/home/code/verilog/Sirius/src/cpu/Sirius.v:390]
+WARNING: [VRFC 10-2938] 'wb_wd_i' is already implicitly declared on line 77 [/home/code/verilog/Sirius/src/cpu/Sirius.v:393]
+WARNING: [VRFC 10-2938] 'wb_wreg_i' is already implicitly declared on line 76 [/home/code/verilog/Sirius/src/cpu/Sirius.v:394]
+WARNING: [VRFC 10-2938] 'wb_wdata_i' is already implicitly declared on line 78 [/home/code/verilog/Sirius/src/cpu/Sirius.v:395]
+WARNING: [VRFC 10-2938] 'wb_hi_o' is already implicitly declared on line 242 [/home/code/verilog/Sirius/src/cpu/Sirius.v:428]
+WARNING: [VRFC 10-2938] 'wb_lo_o' is already implicitly declared on line 243 [/home/code/verilog/Sirius/src/cpu/Sirius.v:429]
+WARNING: [VRFC 10-2938] 'wb_whilo_o' is already implicitly declared on line 244 [/home/code/verilog/Sirius/src/cpu/Sirius.v:430]
+WARNING: [VRFC 10-2938] 'hi_o' is already implicitly declared on line 238 [/home/code/verilog/Sirius/src/cpu/Sirius.v:434]
+WARNING: [VRFC 10-2938] 'lo_o' is already implicitly declared on line 239 [/home/code/verilog/Sirius/src/cpu/Sirius.v:435]
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/cpu_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cpu_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/cpu/CTRL/ctrl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ctrl
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/cpu/ex/div.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module div
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/cpu/ex/ex.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ex
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/cpu/ex/ex_mem.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ex_mem
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/register/hilo_reg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hilo_reg
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/cpu/id/id.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module id
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/cpu/id/id_ex.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module id_ex
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/cpu/if/if_id.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module if_id
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/inst_rom.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module inst_rom
+WARNING: [VRFC 10-1581] illegal format specifier p for display [/home/code/verilog/Sirius/src/inst_rom.v:17]
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/cpu/mem/mem.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mem
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/cpu/mem/mem_wb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mem_wb
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/cpu/if/pc_reg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pc_reg
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/register/regfile.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module regfile
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/code/verilog/Sirius/src/Sirius_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Sirius_tb
