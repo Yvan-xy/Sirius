@@ -31,6 +31,12 @@ module Sirius(
     wire                div_start;
     // wire                 annul_i;    // not now
 
+    // Branch staff
+    wire                is_in_delayslot_i;
+    wire                is_in_delayslot_o;
+    wire                next_inst_in_delayslot_o;
+    wire                id_branch_flag_o;
+    wire[`RegBus]       branch_target_address;
 
     // Instantiate Divider
     div div0(
@@ -84,6 +90,8 @@ module Sirius(
         .clk(clk),
         .rst(rst),
         .stall(stall),
+        .branch_flag_i(id_branch_flag_o),
+        .branch_target_address_i(branch_target_address),
         .pc(pc),
         .ce(rom_ce_o)
     );    
@@ -123,6 +131,9 @@ module Sirius(
         .mem_wdata_i(mem_wdata_o),
         .mem_wd_i(mem_wd_o),
 
+        // Delayslot
+        .is_in_delayslot_i(is_in_delayslot_i),
+
         /***** OUTPUT *****/
 
         // Output data to Regfile
@@ -139,6 +150,12 @@ module Sirius(
         .wd_o(id_wd_o),
         .wreg_o(id_wreg_o),
 
+        .next_inst_in_delayslot_o(next_inst_in_delayslot_o),
+        .branch_flag_o(id_branch_flag_o),
+        .branch_target_address_o(branch_target_address),
+        .link_addr_o(id_link_address_o),
+        .is_in_delayslot_o(id_is_in_delayslot_o),
+
         .stallreq(stallreq_from_id)
     );
 
@@ -149,6 +166,9 @@ module Sirius(
     wire[`RegBus]       id_reg2_o;
     wire                id_wreg_o;
     wire[`RegAddrBus]   id_wd_o;
+    wire                id_is_in_delayslot_o;
+    wire[`RegBus]       id_link_address_o;
+    wire[`RegBus]       id_inst_o;
 
     // Instantiate ID/EX
     id_ex id_ex0(
@@ -162,6 +182,9 @@ module Sirius(
         .id_reg2(id_reg2_o),
         .id_wd(id_wd_o),
         .id_wreg(id_wreg_o),
+        .id_link_address(id_link_address_o),
+        .id_is_in_delayslot(id_is_in_delayslot_o),
+        .next_inst_in_delayslot_i(next_inst_in_delayslot_o),
 
         // Signal from CTRL
         .stall(stall),
@@ -172,7 +195,10 @@ module Sirius(
         .ex_reg1(ex_reg1_i),
         .ex_reg2(ex_reg2_i),
         .ex_wd(ex_wd_i),
-        .ex_wreg(ex_wreg_i)
+        .ex_wreg(ex_wreg_i),
+        .ex_link_address(ex_link_address_i),
+        .ex_is_in_delayslot(ex_is_in_delayslot_i),
+        .is_in_delayslot_o(is_in_delayslot_i)
     );
 
     // connect the port of ID/EX and EX
@@ -182,6 +208,10 @@ module Sirius(
     wire[`RegBus]       ex_reg2_i;
     wire                ex_wreg_i;
     wire[`RegAddrBus]   ex_wd_i;
+
+    wire                ex_is_in_delayslot_i;
+    wire[`RegBus]       ex_link_address_i;
+    wire[`RegBus]       ex_inst_i;
 
     wire                stallreq_from_ex;
     wire[`DoubleRegBus] hilo_temp_to_ex;
@@ -225,6 +255,10 @@ module Sirius(
         // Data from Divider
         .div_result_i(div_result),
         .div_ready_i(div_ready),
+
+        // Branch stuff
+        .link_address_i(ex_link_address_i),
+        .is_in_delayslot_i(ex_is_in_delayslot_i),
 
         /***** OUTPUT *****/
         // Data send to Dividor

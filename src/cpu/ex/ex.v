@@ -32,6 +32,10 @@ module ex(
     input wire[`DoubleRegBus]   div_result_i,   // div's result
     input wire                  div_ready_i,    // is div over or not
 
+    // Branch stuff
+    input wire[`RegBus]         link_address_i,
+    input wire                  is_in_delayslot_i,
+
     // Data send to Divider
     output reg[`RegBus]         div_opdata1_o,
     output reg[`RegBus]         div_opdata2_o,
@@ -491,6 +495,9 @@ module ex(
             end
             `EXE_RES_MUL: begin
                 wdata_o <= mulres[31:0];    
+            end
+            `EXE_RES_JUMP_BRANCH: begin
+                wdata_o <= link_address_i;
             end
             default: begin
                 wdata_o <= `ZeroWord;

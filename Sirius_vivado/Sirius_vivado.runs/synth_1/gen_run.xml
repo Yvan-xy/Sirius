@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7k70tfbv676-1" LaunchTime="1567497997">
-  <File Type="RDS-DCP" Name="Sirius_tb.dcp"/>
   <File Type="PA-TCL" Name="Sirius_tb.tcl"/>
+  <File Type="RDS-DCP" Name="Sirius_tb.dcp"/>
   <File Type="REPORTS-TCL" Name="Sirius_tb_reports.tcl"/>
   <File Type="RDS-RDS" Name="Sirius_tb.vds"/>
   <File Type="RDS-UTIL" Name="Sirius_tb_utilization_synth.rpt"/>
